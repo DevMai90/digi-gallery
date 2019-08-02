@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/DevMai90/digi-gallery/issues"
   },
-  "homepage": "https://github.com/DevMai90/digi-gallery#readme"
+  "homepage": "https://github.com/DevMai90/digi-gallery#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^4.1.1",
+    "config": "^3.2.2",
+    "express": "^4.17.1",
+    "express-validator": "^6.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.7",
+    "nodemon": "^1.19.1"
+  }
 }
