@@ -1,0 +1,19 @@
+{
+  "name": "digi-gallery",
+  "version": "1.0.0",
+  "description": "Digital photo blog",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevMai90/digi-gallery.git"
+  },
+  "author": "David Mai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DevMai90/digi-gallery/issues"
+  },
+  "homepage": "https://github.com/DevMai90/digi-gallery#readme"
+}
