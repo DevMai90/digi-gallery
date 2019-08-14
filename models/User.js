@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 
 // Everything is derived from a schema which creates the document's data structure (shape of the document)
 const UserSchema = new mongoose.Schema({
-  name: {
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
     type: String,
     required: true
   },
@@ -12,12 +16,15 @@ const UserSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
+    lowercase: true,
     unique: true,
-    lowercase: true
+    required: true
   },
   handle: {
     type: String,
+    minlength: 8,
+    maxlength: 32,
+    trim: true,
     unqiue: true
   },
   avatar: {
