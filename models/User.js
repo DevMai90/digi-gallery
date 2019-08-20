@@ -4,21 +4,25 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   lastName: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   password: {
     type: String,
     required: true
   },
+  // @todo Validate email format through regex
   email: {
     type: String,
     lowercase: true,
     unique: true,
-    required: true
+    required: true,
+    trim: true
   },
   handle: {
     type: String,

@@ -8,6 +8,12 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
+// Initialize body-parser middleware which allows us to access req.body. Parses incoming request bodies in a middleware before handlers (callbacks) run. This is data that the client is sending to us
+// Old versions of Node required this to installed separately, but is now a core Express module
+// Note: Does not handle multipart bodies, only parses JSON, and Content-Type header must match type option (default is application/json)
+// extended: false to use querystring library (query string cannot contain nested objects) instead of qs library.
+app.use(express.json({ extended: false }));
+
 // Test to see if server is up
 app.get('/', (req, res) => {
   console.log('API running');
