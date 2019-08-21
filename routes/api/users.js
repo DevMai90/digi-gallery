@@ -4,6 +4,8 @@ const router = express.Router();
 // Bring in express-validator to validate input and report any errors before completing request and sending a response
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
 // Load User model
 const User = require('../../models/User');
@@ -65,7 +67,7 @@ router.post(
         about
       });
 
-      // Encrypt password
+      // Encrypt password - Salt and Hash
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
 
@@ -73,10 +75,20 @@ router.post(
       // Mongoose returns a promise
       await user.save();
 
-      // Return JWT
+      // Return JWT - asynchronous, use callback
+      const payload = { user: user.id };
 
-      console.log(req.body);
-      res.send('User route');
+      jwt.sign(
+        payload,
+        config.get('jwtSecret'),
+        {
+          expiresIn: '12h'
+        },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
     } catch (err) {
       console.log(err.message);
       res.status(500).send('Server error');
