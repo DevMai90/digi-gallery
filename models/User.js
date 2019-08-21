@@ -35,7 +35,8 @@ const UserSchema = new mongoose.Schema({
     type: String
   },
   about: {
-    type: String
+    type: String,
+    maxlength: 1000
   },
   date: {
     type: Date,

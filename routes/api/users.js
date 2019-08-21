@@ -26,7 +26,10 @@ router.post(
       'password',
       'Please enter a password with 6 or more characters'
     ).isLength({ min: 6 }),
-    check('email', 'Please enter a valid email').isEmail()
+    check('email', 'Please enter a valid email').isEmail(),
+    check('about', 'Maximum length allowed is 1,000 characters').isLength({
+      max: 1000
+    })
   ],
   async (req, res) => {
     // Check if express-validator found any errors
@@ -37,7 +40,7 @@ router.post(
     }
 
     // Destructure input fields from req.body
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, handle, about } = req.body;
 
     try {
       // Check if there is an existing user by querying the User model
@@ -57,7 +60,9 @@ router.post(
         firstName,
         lastName,
         email,
-        password
+        password,
+        handle,
+        about
       });
 
       // Encrypt password
@@ -65,13 +70,15 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
 
       // Save new user. Note that we save the ENCRYPTED password
-      user.save();
+      // Mongoose returns a promise
+      await user.save();
 
       // Return JWT
 
       console.log(req.body);
       res.send('User route');
     } catch (err) {
+      console.log(err.message);
       res.status(500).send('Server error');
     }
   }
