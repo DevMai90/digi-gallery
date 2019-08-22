@@ -75,8 +75,8 @@ router.post(
       // Mongoose returns a promise
       await user.save();
 
-      // Return JWT - asynchronous, use callback
-      const payload = { user: user.id };
+      // Return JWT to client - asynchronous, use callback
+      const payload = { user: { id: user.id } };
 
       jwt.sign(
         payload,

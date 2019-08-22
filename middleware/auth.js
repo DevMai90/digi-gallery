@@ -10,25 +10,22 @@ module.exports = function(req, res, next) {
   // Get token from the authorization header. When we send request to a protected route, we must send a header. In this case we are getting it from 'x-auth-token'.
 
   // Headers are available in the req object. This is the signed JWT we receive back from the client
-  const token = req.headers('x-auth-token');
+
+  // .headers list all headers. .header() finds specific header type
+  const token = req.header('x-auth-token');
 
   // Check if there is no token
   if (!token) res.status(401).json({ msg: 'No token, not authorized' });
 
   // Verify token
   try {
+    // decoded object will have our JWT payload. This information is visible!
     const decoded = jwt.verify(token, config.get('jwtSecret'));
 
-    // DEVELOPMENT ONLY
-    console.log(req);
-
-    // Set user to decoded user
+    // Set user to decoded user on our request
+    // user is derived from our decoded token (authentication!)
     req.user = decoded.user;
-
-    // DEVELOPMENT ONLY
-    console.log(decoded);
-    console.log(decoded.user);
-
+    console.log(req.user);
     // Moves to next middleware in stack
     next();
   } catch (err) {
