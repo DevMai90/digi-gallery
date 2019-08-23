@@ -26,8 +26,13 @@ const UserSchema = new mongoose.Schema({
   },
   handle: {
     type: String,
-    minlength: 8,
-    maxlength: 32,
+    // minlength: 8,
+    // maxlength: 32,
+    // Custom validation. Empty strings would fail because it does not meet minlength requirement.
+    validate: function(value) {
+      if (value === '') return true;
+      else return value.length >= 8 && value.length <= 32;
+    },
     trim: true,
     unqiue: true
   },

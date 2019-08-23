@@ -31,6 +31,16 @@ router.post(
     check('email', 'Please enter a valid email').isEmail(),
     check('about', 'Maximum length allowed is 1,000 characters').isLength({
       max: 1000
+    }),
+    check(
+      'handle',
+      'Handle must be greater than 8 characters and less than 32 characters in length'
+    ).custom(value => {
+      if (value !== '') {
+        return value.trim().length >= 8 && value.trim().length <= 32;
+      }
+      return true;
+      // return value !== '' && value.length < 8 && value.length > 32;
     })
   ],
   async (req, res) => {
@@ -44,6 +54,12 @@ router.post(
     // Destructure input fields from req.body
     const { firstName, lastName, email, password, handle, about } = req.body;
 
+    // if (handle) {
+    //   const checkHandle = await User.findOne({ handle });
+
+    //   if (checkHandle) return res.status(422).json()
+    // }
+
     try {
       // Check if there is an existing user by querying the User model
       // Search email field with email from req.body (destructured)
@@ -54,6 +70,15 @@ router.post(
         return res.status(400).json({
           errors: [{ msg: 'User already exists' }]
         });
+      } else if (handle) {
+        // Check is handle is taken. If yes then send error in same format as express-validator
+        let checkHandle = await User.findOne({ handle });
+
+        if (checkHandle) {
+          return res.status(422).json({
+            errors: [{ msg: 'User handle is already taken' }]
+          });
+        }
       }
 
       // Create new User instance using inputs from req.body
