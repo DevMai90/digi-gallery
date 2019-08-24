@@ -25,7 +25,6 @@ module.exports = function(req, res, next) {
     // Set user to decoded user on our request
     // user is derived from our decoded token (authentication!)
     req.user = decoded.user;
-    console.log(req.user);
     // Moves to next middleware in stack
     next();
   } catch (err) {
