@@ -6,6 +6,7 @@ const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const auth = require('../../middleware/auth');
 
 // Load User model
 const User = require('../../models/User');
@@ -40,7 +41,6 @@ router.post(
         return value.trim().length >= 8 && value.trim().length <= 32;
       }
       return true;
-      // return value !== '' && value.length < 8 && value.length > 32;
     })
   ],
   async (req, res) => {
@@ -53,12 +53,6 @@ router.post(
 
     // Destructure input fields from req.body
     const { firstName, lastName, email, password, handle, about } = req.body;
-
-    // if (handle) {
-    //   const checkHandle = await User.findOne({ handle });
-
-    //   if (checkHandle) return res.status(422).json()
-    // }
 
     try {
       // Check if there is an existing user by querying the User model
@@ -120,5 +114,25 @@ router.post(
     }
   }
 );
+
+// @route   GET /api/users/me
+// @desc    Retrieve current user's profile
+// @access  Private - Using user id
+router.get('/me', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ error: [{ msg: 'Unable to locate user' }] });
+    }
+
+    res.json(user);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
