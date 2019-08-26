@@ -172,4 +172,20 @@ router.post('/update', auth, async (req, res) => {
   }
 });
 
+// @route   DELETE /api/users
+// @desc    Delete current user
+// @access  Private
+router.delete('/', auth, async (req, res) => {
+  try {
+    // @todo Delete user's posts
+    // Delete user
+    await User.findOneAndDelete({ _id: req.user.id });
+
+    res.json({ msg: 'User deleted' });
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
 module.exports = router;
