@@ -120,7 +120,7 @@ router.post(
 // @access  Private - Using user id
 router.get('/me', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await User.findOne({ user: req.user.id });
 
     if (!user) {
       return res
@@ -129,6 +129,43 @@ router.get('/me', auth, async (req, res) => {
     }
 
     res.json(user);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   POST /api/users/update
+// @desc    Update current user
+// @access   Private
+router.post('/update', auth, async (req, res) => {
+  // @todo change password and avatar
+  const { firstName, lastName, email, handle } = req.body;
+
+  // Construct updated fields object
+  const profileFields = {};
+  profileFields.user = req.user.id;
+  for (let field in req.body) {
+    if (req.body[field]) profileFields[field] = req.body[field];
+  }
+
+  try {
+    let user = await User.findOne({ _id: req.user.id });
+
+    if (user) {
+      // Finds first document matching the given filter
+      let filter = { _id: req.user.id };
+      // $set replaces the value of a field with the specified value.
+      // Remember, we are passing in an object. The fields included in the object will be updated.
+      // Set will create a new field if it does not already exist
+      let update = { $set: profileFields };
+      // fineOneAndUpdate returns document BEFORE update by default. Must add new: true to return updated document
+      let newDoc = { new: true };
+
+      // fineOneAndUpdate saves
+      user = await User.findOneAndUpdate(filter, update, newDoc);
+    }
+    return res.json(user);
   } catch (err) {
     console.log(err.message);
     res.status(500).send('Server Error');
