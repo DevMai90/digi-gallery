@@ -120,8 +120,8 @@ router.post(
 // @access  Private - Using user id
 router.get('/me', auth, async (req, res) => {
   try {
-    const user = await User.findOne({ user: req.user.id });
-
+    const user = await User.findOne({ _id: req.user.id });
+    console.log(req.user);
     if (!user) {
       return res
         .status(400)
@@ -140,7 +140,6 @@ router.get('/me', auth, async (req, res) => {
 // @access   Private
 router.post('/update', auth, async (req, res) => {
   // @todo change password and avatar
-  const { firstName, lastName, email, handle } = req.body;
 
   // Construct updated fields object
   const profileFields = {};
@@ -153,6 +152,26 @@ router.post('/update', auth, async (req, res) => {
     let user = await User.findOne({ _id: req.user.id });
 
     if (user) {
+      if (profileFields.newPassword) {
+        // Check password
+        const isMatch = await bcrypt.compare(
+          profileFields.oldPassword,
+          user.password
+        );
+
+        if (isMatch) {
+          const salt = await bcrypt.genSalt(10);
+          profileFields.password = await bcrypt.hash(
+            profileFields.newPassword,
+            salt
+          );
+        } else {
+          return res.status(400).json({
+            errors: [{ msg: 'Invalid password. Please check password input.' }]
+          });
+        }
+      }
+
       // Finds first document matching the given filter
       let filter = { _id: req.user.id };
       // $set replaces the value of a field with the specified value.
