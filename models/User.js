@@ -37,7 +37,9 @@ const UserSchema = new mongoose.Schema({
     unqiue: true
   },
   avatar: {
-    type: String
+    type: String,
+    default:
+      'http://www.gravatar.com/avatar/121a93377e53afe49c84f42545726b80?s=200&r=pg&d=mm'
   },
   about: {
     type: String,
