@@ -211,7 +211,7 @@ router.delete('/', auth, async (req, res) => {
 // @route   PUT /api/users/avatar
 // @desc    Update avatar
 // @access  Private
-router.put('/avatar', [auth, uploadAvatar], async (req, res) => {
+router.put('/avatar', [auth], async (req, res) => {
   // console.log(req.file);
   try {
     let user = await User.findOne({ _id: req.user.id });
@@ -219,12 +219,6 @@ router.put('/avatar', [auth, uploadAvatar], async (req, res) => {
     await uploadAvatar(req, res, err => {
       if (err) {
         return res.status(422).send({ errors: [{ msg: err.message }] });
-      }
-
-      if (req.fileValidationError) {
-        return res
-          .status(422)
-          .send({ errors: [{ msg: req.fileValidationError }] });
       }
 
       user.avatar = req.file.location;

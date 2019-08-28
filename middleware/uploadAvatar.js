@@ -18,18 +18,16 @@ const checkFileType = (req, file, cb) => {
   // Check mimetype
   const mimetype = fileTypes.test(file.mimetype);
 
-  if (mimetype) {
-    return cb(null, true);
-  } else {
-    // cb(null, false, new Error('Error: Images only'));
-    req.fileValidationError = 'Image files only';
-    return cb(null, false, new Error('Image files only'));
-  }
+  if (mimetype) return cb(null, true);
+  else return cb(new Error('Image files only'));
 };
 
 const uploadAvatar = multer({
   fileFilter: (req, file, cb) => {
     checkFileType(req, file, cb);
+  },
+  limits: {
+    fileSize: 1000000
   },
   storage: multerS3({
     s3,
