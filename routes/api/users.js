@@ -207,4 +207,9 @@ router.delete('/', auth, async (req, res) => {
   }
 });
 
+// @todo
+// @route   PUT /api/users
+// @desc    Update avatar
+// @access  Private
+
 module.exports = router;
