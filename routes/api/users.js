@@ -216,9 +216,15 @@ router.put('/avatar', [auth, uploadAvatar], async (req, res) => {
   try {
     let user = await User.findOne({ _id: req.user.id });
 
-    uploadAvatar(req, res, err => {
+    await uploadAvatar(req, res, err => {
       if (err) {
         return res.status(422).send({ errors: [{ msg: err.message }] });
+      }
+
+      if (req.fileValidationError) {
+        return res
+          .status(422)
+          .send({ errors: [{ msg: req.fileValidationError }] });
       }
 
       user.avatar = req.file.location;
