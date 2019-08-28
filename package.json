@@ -18,12 +18,14 @@
   },
   "homepage": "https://github.com/DevMai90/digi-gallery#readme",
   "dependencies": {
+    "aws-sdk": "^2.518.0",
     "bcryptjs": "^2.4.3",
     "config": "^3.2.2",
     "express": "^4.17.1",
     "express-validator": "^6.1.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.7",
+    "multer": "^1.4.2",
     "multer-s3": "^2.9.0"
   },
   "devDependencies": {

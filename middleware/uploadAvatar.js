@@ -24,12 +24,15 @@ const uploadAvatar = multer({
       // Need to call cb. First parameter is an error
       cb(null, {
         mimetype: file.mimetype,
-        originalName: file.originalname
+        originalName: file.originalname,
+        date: Date.now().toString()
       });
     },
-    // key is name of the file
-    key: req.user.id
+    // key is what we are naming the file
+    key: (req, file, cb) => {
+      cb(null, req.user.id);
+    }
   })
-});
+}).single('avatar');
 
 module.exports = uploadAvatar;

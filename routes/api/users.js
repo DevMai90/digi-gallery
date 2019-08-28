@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const auth = require('../../middleware/auth');
+const uploadAvatar = require('../../middleware/uploadAvatar');
 
 // Load User model
 const User = require('../../models/User');
@@ -203,13 +204,31 @@ router.delete('/', auth, async (req, res) => {
     res.json({ msg: 'User deleted' });
   } catch (err) {
     console.log(err.message);
-    res.status(500).send('Server error');
+    res.status(500).send('Server Error');
   }
 });
 
-// @todo
-// @route   PUT /api/users
+// @route   PUT /api/users/avatar
 // @desc    Update avatar
 // @access  Private
+router.put('/avatar', [auth, uploadAvatar], async (req, res) => {
+  // console.log(req.file);
+  try {
+    let user = await User.findOne({ _id: req.user.id });
+
+    uploadAvatar(req, res, err => {
+      if (err) {
+        return res.status(422).send({ errors: [{ msg: err.message }] });
+      }
+
+      user.avatar = req.file.location;
+      user.save();
+      res.json(user);
+    });
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
