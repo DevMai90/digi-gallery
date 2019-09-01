@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const auth = require('../../middleware/auth');
 const uploadAvatar = require('../../middleware/uploadAvatar');
+const deleteAvatar = require('../../middleware/deleteAvatar');
 
 // Load User model
 const User = require('../../models/User');
@@ -122,7 +123,6 @@ router.post(
 router.get('/me', auth, async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.user.id });
-    console.log(req.user);
     if (!user) {
       return res
         .status(400)
@@ -211,7 +211,7 @@ router.delete('/', auth, async (req, res) => {
 // @route   PUT /api/users/avatar
 // @desc    Update avatar
 // @access  Private
-router.put('/avatar', [auth], async (req, res) => {
+router.put('/avatar', auth, async (req, res) => {
   // console.log(req.file);
   try {
     let user = await User.findOne({ _id: req.user.id });
@@ -228,6 +228,24 @@ router.put('/avatar', [auth], async (req, res) => {
   } catch (err) {
     console.log(err.message);
     res.status(500).send('Server Error');
+  }
+});
+
+// @route   DELETE /api/users/avatar
+// @desc    Delete user's uploaded avatar.
+// @access  Private
+router.delete('/avatar', auth, async (req, res) => {
+  try {
+    let user = await User.findOne({ _id: req.user.id });
+
+    deleteAvatar(req.user.id);
+
+    user.avatar = undefined;
+    user.save();
+    res.json(user);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Sever Error');
   }
 });
 
