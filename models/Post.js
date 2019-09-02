@@ -46,6 +46,7 @@ const PostSchema = new mongoose.Schema({
       handle: {
         type: String
       },
+      // Populate first name and last name?
       firstName: {
         type: String,
         required: true

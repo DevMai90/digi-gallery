@@ -52,4 +52,21 @@ const uploadAvatar = multer({
   })
 }).single('avatar');
 
-module.exports = uploadAvatar;
+const deleteAvatar = Key => {
+  const avatar = {
+    Bucket: 'digi-gallery/avatar',
+    Key
+  };
+
+  s3.deleteObject(avatar, (err, data) => {
+    if (err) throw new Error(err);
+
+    // @todo Add validation?
+    console.log('Avatar deleted');
+  });
+};
+
+module.exports = {
+  uploadAvatar,
+  deleteAvatar
+};

@@ -7,8 +7,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const auth = require('../../middleware/auth');
-const uploadAvatar = require('../../middleware/uploadAvatar');
-const deleteAvatar = require('../../middleware/deleteAvatar');
+// const uploadAvatar = require('../../middleware/uploadAvatar');
+const multerS3 = require('../../middleware/multerS3');
+// const deleteAvatar = require('../../middleware/deleteAvatar');
 
 // Load User model
 const User = require('../../models/User');
@@ -216,7 +217,7 @@ router.put('/avatar', auth, async (req, res) => {
   try {
     let user = await User.findOne({ _id: req.user.id });
 
-    await uploadAvatar(req, res, err => {
+    await multerS3.uploadAvatar(req, res, err => {
       if (err) {
         return res.status(422).send({ errors: [{ msg: err.message }] });
       }
@@ -238,7 +239,7 @@ router.delete('/avatar', auth, async (req, res) => {
   try {
     let user = await User.findOne({ _id: req.user.id });
 
-    deleteAvatar(req.user.id);
+    multerS3.deleteAvatar(req.user.id);
 
     user.avatar = undefined;
     user.save();
