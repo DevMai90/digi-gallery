@@ -7,9 +7,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const auth = require('../../middleware/auth');
-// const uploadAvatar = require('../../middleware/uploadAvatar');
 const multerS3 = require('../../middleware/multerS3');
-// const deleteAvatar = require('../../middleware/deleteAvatar');
 
 // Load User model
 const User = require('../../models/User');
@@ -123,7 +121,7 @@ router.post(
 // @access  Private - Using user id
 router.get('/me', auth, async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.user.id });
+    const user = await User.findOne({ _id: req.user.id }).select('-password');
     if (!user) {
       return res
         .status(400)
