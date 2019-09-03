@@ -16,13 +16,27 @@ const PostSchema = new mongoose.Schema({
     required: true
   },
   image: {
-    type: String,
-    required: true
+    type: String
+    // required: true
   },
   postText: {
     type: String,
-    maxlenth: 500,
+    maxlength: 500,
     required: true
+  },
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
+  handle: {
+    type: String
+  },
+  avatar: {
+    type: String
   },
   likes: [
     {
@@ -76,3 +90,5 @@ const PostSchema = new mongoose.Schema({
     default: 0
   }
 });
+
+module.exports = Post = mongoose.model('post', PostSchema);

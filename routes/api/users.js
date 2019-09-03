@@ -213,9 +213,8 @@ router.delete('/', auth, async (req, res) => {
 // @desc    Update avatar
 // @access  Private
 router.put('/avatar', auth, async (req, res) => {
-  // console.log(req.file);
   try {
-    let user = await User.findOne({ _id: req.user.id });
+    let user = await User.findOne({ _id: req.user.id }).select('-password');
 
     await multerS3.uploadAvatar(req, res, err => {
       if (err) {
@@ -237,7 +236,7 @@ router.put('/avatar', auth, async (req, res) => {
 // @access  Private
 router.delete('/avatar', auth, async (req, res) => {
   try {
-    let user = await User.findOne({ _id: req.user.id });
+    let user = await User.findOne({ _id: req.user.id }).select('-password');
 
     multerS3.deleteAvatar(req.user.id);
 

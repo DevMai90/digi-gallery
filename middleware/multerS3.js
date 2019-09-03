@@ -2,6 +2,7 @@ const config = require('config');
 const aws = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
+const uuidv4 = require('uuid/v4');
 
 aws.config.update({
   accessKeyId: config.get('accessKeyId'),
@@ -66,7 +67,36 @@ const deleteAvatar = Key => {
   });
 };
 
+const uploadImage = multer({
+  fileFilter: (req, file, cb) => {
+    checkFileType(req, file, cb);
+  },
+  limits: {
+    fileSize: 5000000
+  },
+  storage: multerS3({
+    s3,
+    // Create custom folder with user id
+    bucket: (req, file, cb) => {
+      cb(null, `digi-gallery/images/${req.user.id}`);
+    },
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    acl: 'public-read',
+    metadata: (req, file, cb) => {
+      cb(null, {
+        mimetype: file.mimetype,
+        originalName: file.originalname,
+        date: Date.now().toString()
+      });
+    },
+    key: (req, file, cb) => {
+      cb(null, `${Date.now()}-${uuidv4()}`);
+    }
+  })
+}).single('image');
+
 module.exports = {
   uploadAvatar,
-  deleteAvatar
+  deleteAvatar,
+  uploadImage
 };
