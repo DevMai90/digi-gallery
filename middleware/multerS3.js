@@ -19,8 +19,10 @@ const checkFileType = (req, file, cb) => {
   // Check mimetype
   const mimetype = fileTypes.test(file.mimetype);
 
+  // To reject, pass false. To accept, pass true
+  // console.log(req);
   if (mimetype) return cb(null, true);
-  else return cb(new Error('Image files only'));
+  else return cb(new Error('Image files only'), false);
 };
 
 const uploadAvatar = multer({

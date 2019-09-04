@@ -15,6 +15,11 @@ router.post(
   '/',
   [
     auth,
+    // Note: Must use multer with multipart/form-data or else req.body will not be accessible. Multer ONLY handles multipart/form-data
+    // Multer adds a body object and files/files to the request object.
+    // Body contains text field values from form.
+    // File/files contains files uploaded from form.
+    // Remember enctype="multipart/form-data" on client side.
     multerS3.uploadImage,
     check('postText', 'Please enter your post text.')
       .not()
@@ -56,9 +61,6 @@ router.post(
 
       res.send(newPost);
 
-      // Multer Image
-      // Note: Must use multer with multipart form-data or else red.body will not be accessible
-
       // await multerS3.uploadImage(req, res, err => {
       //   if (err) {
       //     return res.status(422).send({ errors: [{ msg: err.message }] });
@@ -89,5 +91,19 @@ router.post(
     }
   }
 );
+
+// @route   GET /api/posts
+// @desc    Get all posts
+// @access  Private
+router.get('/', auth, async (req, res) => {
+  try {
+    let posts = await Post.find().sort({ date: -1 });
+
+    res.json(posts);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
