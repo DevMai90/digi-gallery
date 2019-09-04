@@ -139,5 +139,30 @@ router.get('/:postid', async (req, res) => {
 // @route   DELETE /api/posts/:postid
 // @desc    Delete single post by id
 // @access  Private
+router.delete('/:postid', auth, async (req, res) => {
+  try {
+    let post = await Post.findById(req.params.postid);
+
+    // Check if post is found
+    // Must also check if postid is formatted as a valid mongoose ObjectId
+    // Mongoose's findById method casts postid parameter to the object model's id. Will cause a cast error if postid is not properly formatted as an ObjectId
+    if (!req.params.postid.match(/^[0-9a-fA-F]{24}$/) || !post)
+      return res
+        .status(404)
+        .json({ errors: [{ msg: 'Unable to locate post' }] });
+
+    // Check if user is the same as the post author
+    // Must toString because _id (in this case _id from User model) on Mongoose has the type of Object. id (no _) would return a string
+    if (req.body.id !== post.user.toString()) {
+      return res.status(401).json({ errors: [{ msg: 'Unauthorized access' }] });
+    }
+
+    await post.remove();
+    res.json({ msg: 'Post removed' });
+  } catch (err) {
+    console.log(err.message);
+    res.send('Server Error');
+  }
+});
 
 module.exports = router;

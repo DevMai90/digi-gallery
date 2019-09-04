@@ -124,7 +124,7 @@ router.get('/me', auth, async (req, res) => {
     const user = await User.findOne({ _id: req.user.id }).select('-password');
     if (!user) {
       return res
-        .status(400)
+        .status(422)
         .json({ error: [{ msg: 'Unable to locate user' }] });
     }
 
