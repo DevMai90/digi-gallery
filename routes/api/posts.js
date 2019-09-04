@@ -106,4 +106,18 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+// @route   GET /api/posts/:user
+// @desc    Get all posts by user id
+// @acccess Private
+router.get('/:user', auth, async (req, res) => {
+  try {
+    let posts = await Post.find({ user: req.params.user });
+
+    res.json(posts);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;
