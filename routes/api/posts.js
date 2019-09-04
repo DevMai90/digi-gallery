@@ -106,12 +106,12 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route   GET /api/posts/:user
+// @route   GET /api/posts/user/:userid
 // @desc    Get all posts by user id
 // @acccess Private
-router.get('/:user', auth, async (req, res) => {
+router.get('/user/:userid', auth, async (req, res) => {
   try {
-    let posts = await Post.find({ user: req.params.user });
+    let posts = await Post.find({ user: req.params.userid });
 
     res.json(posts);
   } catch (err) {
@@ -119,5 +119,7 @@ router.get('/:user', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// @route   GET /api/posts/
 
 module.exports = router;
