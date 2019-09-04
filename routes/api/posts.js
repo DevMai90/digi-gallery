@@ -94,8 +94,8 @@ router.post(
 
 // @route   GET /api/posts
 // @desc    Get all posts
-// @access  Private
-router.get('/', auth, async (req, res) => {
+// @access  Public
+router.get('/', async (req, res) => {
   try {
     let posts = await Post.find().sort({ date: -1 });
 
@@ -108,9 +108,11 @@ router.get('/', auth, async (req, res) => {
 
 // @route   GET /api/posts/user/:userid
 // @desc    Get all posts by user id
-// @acccess Private
-router.get('/user/:userid', auth, async (req, res) => {
+// @acccess Public
+router.get('/user/:userid', async (req, res) => {
   try {
+    // req.params contains route parameters in the path portion of the URL.
+    // The : makes it accessible with req.params
     let posts = await Post.find({ user: req.params.userid });
 
     res.json(posts);
@@ -120,6 +122,22 @@ router.get('/user/:userid', auth, async (req, res) => {
   }
 });
 
-// @route   GET /api/posts/
+// @route   GET /api/posts/:postid
+// @desc    Get single post by id
+// @access  Public
+router.get('/:postid', async (req, res) => {
+  try {
+    let post = await Post.findById(req.params.postid);
+
+    res.json(post);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   DELETE /api/posts/:postid
+// @desc    Delete single post by id
+// @access  Private
 
 module.exports = router;
