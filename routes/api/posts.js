@@ -129,6 +129,11 @@ router.get('/:postid', async (req, res) => {
   try {
     let post = await Post.findById(req.params.postid);
 
+    if (!post)
+      return res
+        .status(404)
+        .json({ errors: [{ msg: 'Unable to locate post' }] });
+
     res.json(post);
   } catch (err) {
     console.log(err.message);
@@ -153,7 +158,7 @@ router.delete('/:postid', auth, async (req, res) => {
 
     // Check if user is the same as the post author
     // Must toString because _id (in this case _id from User model) on Mongoose has the type of Object. id (no _) would return a string
-    if (req.body.id !== post.user.toString()) {
+    if (req.user.id !== post.user.toString()) {
       return res.status(401).json({ errors: [{ msg: 'Unauthorized access' }] });
     }
 
@@ -164,5 +169,9 @@ router.delete('/:postid', auth, async (req, res) => {
     res.send('Server Error');
   }
 });
+
+// Comments
+
+// Likes
 
 module.exports = router;
