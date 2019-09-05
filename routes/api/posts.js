@@ -127,7 +127,13 @@ router.get('/user/:userid', async (req, res) => {
 // @access  Public
 router.get('/:postid', async (req, res) => {
   try {
-    let post = await Post.findById(req.params.postid);
+    // let post = await Post.findById(req.params.postid);
+    let post = await Post.findOneAndUpdate(
+      { _id: req.params.postid },
+      { $inc: { views: 1 } },
+      // Must include new or else mongoose sends the document PRIOR to being updated
+      { new: true }
+    );
 
     if (!post)
       return res
