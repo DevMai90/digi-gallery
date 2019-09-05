@@ -141,6 +141,40 @@ router.get('/:postid', async (req, res) => {
   }
 });
 
+// @route   PUT /api/posts/:postid
+// @desc    Edit single post
+// @access  Private
+router.put('/:postid', auth, async (req, res) => {
+  try {
+    let post = await Post.findById(req.params.postid);
+
+    // Check for post or ObjectId format
+    if (!req.params.postid.match(/^[0-9a-fA-F]{24}$/) || !post)
+      return res
+        .status(404)
+        .json({ errors: [{ msg: 'Unable to locate post' }] });
+
+    if (req.user.id !== post.user.toString()) {
+      return res.status(401).json({ errors: [{ msg: 'Unauthorized access' }] });
+    }
+
+    const { title, postText, category } = req.body;
+
+    if (title) post.title = title;
+    if (postText) post.postText = postText;
+    if (category) post.category = category;
+
+    post.edited = new Date();
+
+    await post.save();
+
+    res.json(post);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 // @route   DELETE /api/posts/:postid
 // @desc    Delete single post by id
 // @access  Private
