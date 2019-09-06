@@ -217,6 +217,11 @@ router.put('/like/:postid', auth, async (req, res) => {
   try {
     let post = await Post.findById(req.params.postid);
 
+    if (!req.params.postid.match(/^[0-9a-fA-F]{24}$/) || !post)
+      return res
+        .status(404)
+        .json({ errors: [{ msg: 'Unable to locate post' }] });
+
     // Check if user already liked post
     // Empty arrays are truthy so we need to check array LENGTH
     // like.user is an ObjectId, not string
@@ -240,6 +245,37 @@ router.put('/like/:postid', auth, async (req, res) => {
 // @route   PUT /api/posts/unlike/:postid
 // @desc    Unlike a post
 // @access  Private
+router.put('/unlike/:postid', auth, async (req, res) => {
+  try {
+    let post = await Post.findById(req.params.postid);
+
+    // Check ObjectId format and if post exists
+    if (!req.params.postid.match(/^[0-9a-fA-F]{24}$/) || !post)
+      return res
+        .status(404)
+        .json({ errors: [{ msg: 'Unable to locate post' }] });
+
+    // Find post to remove
+    const removeIndex = post.likes
+      .map(like => like.user.toString())
+      .indexOf(req.user.id);
+
+    if (removeIndex > -1) {
+      post.likes.splice(removeIndex, 1);
+    } else {
+      return res
+        .status(404)
+        .json({ errors: [{ msg: 'Post has not been liked yet' }] });
+    }
+
+    await post.save();
+
+    res.json(post);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 // @route   POST /api/posts/comment/:postid
 // @desc    Add a comment
