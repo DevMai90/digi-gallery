@@ -39,6 +39,8 @@ const PostSchema = new mongoose.Schema({
     type: String
   },
   likes: [
+    // Mongoose automatically creates ids for each subdocument array
+    // If unwanted, will need a sub-schema and pass in { _id: false }
     {
       user: {
         type: mongoose.Schema.Types.ObjectId,

@@ -147,10 +147,10 @@ router.get('/:postid', async (req, res) => {
   }
 });
 
-// @route   PUT /api/posts/:postid
+// @route   PUT /api/posts/edit/:postid
 // @desc    Edit single post
 // @access  Private
-router.put('/:postid', auth, async (req, res) => {
+router.put('/edit/:postid', auth, async (req, res) => {
   try {
     let post = await Post.findById(req.params.postid);
 
@@ -210,8 +210,47 @@ router.delete('/:postid', auth, async (req, res) => {
   }
 });
 
-// Comments
+// @route   PUT /api/posts/like/:postid
+// @desc    Like a post
+// @access  Private
+router.put('/like/:postid', auth, async (req, res) => {
+  try {
+    let post = await Post.findById(req.params.postid);
 
-// Likes
+    // Check if user already liked post
+    // Empty arrays are truthy so we need to check array LENGTH
+    // like.user is an ObjectId, not string
+    if (
+      post.likes.filter(like => like.user.toString() === req.user.id).length > 0
+    ) {
+      return res.status(422).json({ errors: [{ msg: 'Already liked post' }] });
+    }
+
+    post.likes.push({ user: req.user.id });
+
+    await post.save();
+
+    res.json(post);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   PUT /api/posts/unlike/:postid
+// @desc    Unlike a post
+// @access  Private
+
+// @route   POST /api/posts/comment/:postid
+// @desc    Add a comment
+// @access  Private
+
+// @route   PUT /api/posts/comment/:postid/:commentid
+// @desc    Edit a comment
+// @access  Private
+
+// @route   DELETE /api/posts/comment/:postid/:commentid
+// @desc    Delete a comment
+// @access  Private
 
 module.exports = router;
