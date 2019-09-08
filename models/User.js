@@ -16,7 +16,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // @todo Validate email format through regex
   email: {
     type: String,
     lowercase: true,
