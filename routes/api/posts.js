@@ -231,7 +231,7 @@ router.put('/like/:postid', auth, async (req, res) => {
       return res.status(422).json({ errors: [{ msg: 'Already liked post' }] });
     }
 
-    post.likes.push({ user: req.user.id });
+    post.likes.unshift({ user: req.user.id });
 
     await post.save();
 
@@ -280,6 +280,49 @@ router.put('/unlike/:postid', auth, async (req, res) => {
 // @route   POST /api/posts/comment/:postid
 // @desc    Add a comment
 // @access  Private
+router.post(
+  '/comment/:postid',
+  [
+    auth,
+    check('text', 'Please enter your comment')
+      .not()
+      .isEmpty()
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+    try {
+      let post = await Post.findById(req.params.postid);
+      let user = await User.findById(req.user.id);
+
+      // Check ObjectId format and if post exists
+      if (!req.params.postid.match(/^[0-9a-fA-F]{24}$/) || !post)
+        return res
+          .status(404)
+          .json({ errors: [{ msg: 'Unable to locate post' }] });
+
+      const { firstName, lastName, handle } = user;
+
+      post.comments.unshift({
+        user: req.user.id,
+        text: req.body.text,
+        firstName,
+        lastName,
+        handle
+      });
+
+      await post.save();
+
+      res.json(post);
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
 
 // @route   PUT /api/posts/comment/:postid/:commentid
 // @desc    Edit a comment

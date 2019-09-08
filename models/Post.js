@@ -77,6 +77,9 @@ const PostSchema = new mongoose.Schema({
       date: {
         type: Date,
         default: Date.now
+      },
+      edited: {
+        type: Date
       }
     }
   ],
