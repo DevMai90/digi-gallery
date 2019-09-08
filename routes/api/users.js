@@ -135,15 +135,14 @@ router.get('/me', auth, async (req, res) => {
   }
 });
 
-// @route   POST /api/users/update
+// @route   PUT /api/users/update
 // @desc    Update current user
 // @access   Private
-router.post('/update', auth, async (req, res) => {
-  // @todo change password and avatar
-
+router.put('/update', auth, async (req, res) => {
   // Construct updated fields object
   const profileFields = {};
   profileFields.user = req.user.id;
+
   for (let field in req.body) {
     if (req.body[field]) profileFields[field] = req.body[field];
   }
@@ -153,6 +152,12 @@ router.post('/update', auth, async (req, res) => {
 
     if (user) {
       if (profileFields.newPassword) {
+        if (!profileFields.oldPassword) {
+          return res.status(400).json({
+            errors: [{ msg: 'Please enter your old password.' }]
+          });
+        }
+
         // Check password
         const isMatch = await bcrypt.compare(
           profileFields.oldPassword,
@@ -182,7 +187,9 @@ router.post('/update', auth, async (req, res) => {
       let newDoc = { new: true };
 
       // fineOneAndUpdate saves
-      user = await User.findOneAndUpdate(filter, update, newDoc);
+      user = await User.findOneAndUpdate(filter, update, newDoc).select(
+        '-password'
+      );
     }
     return res.json(user);
   } catch (err) {
