@@ -327,6 +327,46 @@ router.post(
 // @route   PUT /api/posts/comment/:postid/:commentid
 // @desc    Edit a comment
 // @access  Private
+router.put(
+  '/comment/:postid/:commentid',
+  [
+    auth,
+    check('text', 'Please enter your comment')
+      .not()
+      .isEmpty()
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    try {
+      let post = await Post.findById(req.params.postid);
+
+      // Find comment to update
+      let updateIndex = post.comments
+        .map(comment => comment._id.toString())
+        .indexOf(req.params.commentid);
+
+      // Check if user is same as comment poster
+      if (post.comments[updateIndex].user.toString() !== req.user.id) {
+        return res.status(404).json({ errors: [{ msg: 'Not authorized' }] });
+      }
+
+      // Update text
+      post.comments[updateIndex].text = req.body.text;
+      post.comments[updateIndex].edited = new Date();
+
+      post.save();
+
+      res.json(post);
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
 
 // @route   DELETE /api/posts/comment/:postid/:commentid
 // @desc    Delete a comment
