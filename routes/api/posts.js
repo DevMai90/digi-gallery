@@ -344,14 +344,26 @@ router.put(
     try {
       let post = await Post.findById(req.params.postid);
 
+      // Check for post
+      if (!req.params.postid.match(/^[0-9a-fA-F]{24}$/) || !post)
+        return res
+          .status(404)
+          .json({ errors: [{ msg: 'Unable to locate post' }] });
+
       // Find comment to update
-      let updateIndex = post.comments
+      const updateIndex = post.comments
         .map(comment => comment._id.toString())
         .indexOf(req.params.commentid);
 
+      // Check if comment is found
+      if (!req.params.commentid.match(/^[0-9a-fA-F]{24}$/) || updateIndex < 0)
+        return res
+          .status(404)
+          .json({ errors: [{ msg: 'Unable to locate comment' }] });
+
       // Check if user is same as comment poster
       if (post.comments[updateIndex].user.toString() !== req.user.id) {
-        return res.status(404).json({ errors: [{ msg: 'Not authorized' }] });
+        return res.status(401).json({ errors: [{ msg: 'Not authorized' }] });
       }
 
       // Update text
@@ -371,5 +383,44 @@ router.put(
 // @route   DELETE /api/posts/comment/:postid/:commentid
 // @desc    Delete a comment
 // @access  Private
+router.delete('/comment/:postid/:commentid', auth, async (req, res) => {
+  try {
+    let post = await Post.findById(req.params.postid);
+
+    // Check for post
+    if (!req.params.postid.match(/^[0-9a-fA-F]{24}$/) || !post)
+      return res
+        .status(404)
+        .json({ errors: [{ msg: 'Unable to locate post' }] });
+
+    // Find comment index to delete
+    const deleteIndex = post.comments
+      .map(comment => comment._id.toString())
+      .indexOf(req.params.commentid);
+
+    // Check comment parameter
+    if (!req.params.commentid.match(/^[0-9a-fA-F]{24}$/) || deleteIndex < 0)
+      return res
+        .status(404)
+        .json({ errors: [{ msg: 'Unable to locate comment' }] });
+
+    // Check if user is authorized
+    if (post.comments[deleteIndex].user.toString() !== req.user.id) {
+      return res.status(401).json({ errors: [{ msg: 'Not authorized' }] });
+    }
+
+    // Delete comment
+    post.comments.splice(deleteIndex, 1);
+
+    // Update database
+    post.save();
+
+    // Return response
+    res.json(post);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
