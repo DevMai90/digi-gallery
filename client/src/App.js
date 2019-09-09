@@ -1,14 +1,17 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Swtich } from 'react-router-dom';
+import Header from './components/layout/Header';
+import Landing from './components/layout/Landing';
+
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <div className="container">
-        <h1>Hello World!</h1>
-      </div>
-    </div>
+    <Router>
+      <Header />
+      <Landing />
+    </Router>
   );
-}
+};
 
 export default App;

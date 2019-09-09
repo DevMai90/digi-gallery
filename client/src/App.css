@@ -1,0 +1,9 @@
+body {
+  background-image: url('https://digi-gallery.s3-us-west-1.amazonaws.com/theme/background-top.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position-x: 50%;
+  background-position-y: 0%;
+
+  font-family: 'Raleway', sans-serif;
+}
