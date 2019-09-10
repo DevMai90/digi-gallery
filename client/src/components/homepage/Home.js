@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Landing = () => {
+const Home = () => {
   return (
-    <div className="container">
+    <div id="homepage">
       <h1>Hello World</h1>
     </div>
   );
 };
 
-export default Landing;
+export default Home;

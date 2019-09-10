@@ -1,0 +1,3 @@
+- MongoDB with Mongoose for database.
+- React frontend framework.
+- Bootstrap CSS framework.

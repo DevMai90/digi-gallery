@@ -4,6 +4,32 @@ body {
   background-attachment: fixed;
   background-position-x: 50%;
   background-position-y: 0%;
+  background-size: auto 100%;
 
   font-family: 'Raleway', sans-serif;
+
+  margin: 0.5rem;
+}
+
+#header-logo {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#homepage {
+  background: #fff;
+}
+
+#login {
+  background: #fff;
+}
+
+@media (min-width: 1200px) {
+  .contain {
+    width: 1200px !important;
+    margin: auto;
+  }
+}
+
+nav {
+  background: linear-gradient(180deg, #333, #000);
 }

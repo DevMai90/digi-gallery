@@ -1,18 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <div className="container">
-      <h3 className="mt-2">
-        <a href="#" className="text-white">
+    <div>
+      <h3 className="mb-0 p-3" id="header-logo">
+        <Link to="/" className="text-white">
           Digi-Gallery
-        </a>
+        </Link>
       </h3>
 
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        {/* <a href="#" className="navbar-brand" style={{ fontSize: '1.5rem' }}>
-          <strong>Digi-Gallery</strong>
-        </a> */}
+      <nav className="navbar navbar-expand-lg navbar-dark">
         <button
           className="navbar-toggler"
           data-toggle="collapse"
@@ -23,60 +21,73 @@ const Header = () => {
 
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item pr-1 active">
-              <a href="#" className="nav-link">
+            <li className="nav-item px-1 active">
+              <Link to="/" className="nav-link">
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item px-1 dropdown">
-              <a
-                href="#"
+              <Link
+                to="/"
                 className="nav-link dropdown-toggle"
                 id="navbarDropdown"
                 role="button"
                 data-toggle="dropdown"
               >
                 Categories
-              </a>
+              </Link>
               <div className="dropdown-menu">
-                <a href="#" className="dropdown-item">
+                <Link to="/categories/automotive" className="dropdown-item">
                   Automotive
-                </a>
-                <a href="#" className="dropdown-item">
+                </Link>
+                <Link to="/categories/photography" className="dropdown-item">
                   Photography
-                </a>
-                <a href="#" className="dropdown-item">
+                </Link>
+                <Link to="/categories/nature" className="dropdown-item">
                   Nature
-                </a>
-                <a href="#" className="dropdown-item">
+                </Link>
+                <Link to="/categories/daily" className="dropdown-item">
                   Daily
-                </a>
-                <a href="#" className="dropdown-item">
+                </Link>
+                <Link to="/categories/lifestyle" className="dropdown-item">
                   Lifestyle
-                </a>
-                <a href="#" className="dropdown-item">
-                  Random
-                </a>
-                <a href="#" className="dropdown-item">
+                </Link>
+                <Link to="/categories/animals" className="dropdown-item">
+                  Animals
+                </Link>
+                <Link to="/categories/art" className="dropdown-item">
                   Art
-                </a>
-                <a href="#" className="dropdown-item">
+                </Link>
+                <Link to="/categories/people" className="dropdown-item">
                   People
-                </a>
-                <a href="#" className="dropdown-item">
+                </Link>
+                <Link to="/categories/other" className="dropdown-item">
                   Other
-                </a>
+                </Link>
               </div>
             </li>
             <li className="nav-item px-1">
-              <a href="#" className="nav-link">
+              <Link to="/contributors" className="nav-link">
                 Contributor List
-              </a>
+              </Link>
+            </li>
+            {/* <li className="nav-item px-1">
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
+            </li> */}
+          </ul>
+
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item px-1">
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
             </li>
             <li className="nav-item px-1">
-              <a href="#" className="nav-link">
-                Login
-              </a>
+              <Link to="/register" className="nav-link">
+                Register
+              </Link>
             </li>
           </ul>
         </div>
