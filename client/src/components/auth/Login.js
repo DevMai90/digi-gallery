@@ -17,6 +17,11 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle Submit
+  const onSubmit = e => {
+    e.preventDefault();
+  };
+
   return (
     <div id="login">
       <div className="container">
@@ -27,7 +32,7 @@ const Login = () => {
               <p className="text-center">Create, Share, &amp; Repeat</p>
 
               <div className="container">
-                <form className="m-3">
+                <form className="m-3" onSubmit={e => onSubmit(e)}>
                   <div className="form-group">
                     <label htmlFor="login">Email or Username</label>
                     <input

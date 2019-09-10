@@ -5,22 +5,27 @@ import Home from './components/homepage/Home';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 
+// Makes Redux store available to the entire app
+import { Provider } from 'react-redux';
+import store from '../src/store';
+
 import './App.css';
 
 const App = () => {
   return (
-    <Router>
-      <div className="contain">
-        <Header />
-        <Route exact path="/" component={Home} />
-        <Switch>
-          {/* <div style={{ background: 'white' }}> */}
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          {/* </div> */}
-        </Switch>
-      </div>
-    </Router>
+    // Provider wraps around EVERYTHING
+    <Provider store={store}>
+      <Router>
+        <div className="contain">
+          <Header />
+          <Route exact path="/" component={Home} />
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+          </Switch>
+        </div>
+      </Router>
+    </Provider>
   );
 };
 

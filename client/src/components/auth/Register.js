@@ -19,6 +19,13 @@ const Register = () => {
       [e.target.name]: e.target.value
     });
   };
+
+  const onSubmit = e => {
+    e.preventDefault();
+
+    // Check if passwords match
+    if (password1 !== password2) console.log('Password fields do not match');
+  };
   return (
     <div id="login">
       <div className="container">
@@ -31,7 +38,7 @@ const Register = () => {
               </p>
 
               <div className="container">
-                <form className="m-3">
+                <form className="m-3" onSubmit={e => onSubmit(e)}>
                   <div className="form-group">
                     <label htmlFor="firstName">First Name</label>
                     <input
