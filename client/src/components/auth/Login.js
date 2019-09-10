@@ -21,7 +21,7 @@ const Login = () => {
     <div id="login">
       <div className="container">
         <div className="row">
-          <div className="col-6 mx-auto py-3">
+          <div className="col-md-6 mx-auto py-3">
             <div className="card">
               <h3 className="pt-3 text-center">Sign In</h3>
               <p className="text-center">Create, Share, &amp; Repeat</p>
@@ -54,7 +54,7 @@ const Login = () => {
                     type="submit"
                     className="btn btn-primary btn-block py-2"
                   >
-                    <i className="fas fa-arrow-circle-right" /> Sign In
+                    <i className="fas fa-arrow-circle-right mr-1" /> Sign In
                   </button>
                 </form>
 

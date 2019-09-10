@@ -1,14 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
   return (
     <div>
-      <h3 className="mb-0 p-3" id="header-logo">
+      <section id="header-logo" className="text-white p-3">
         <Link to="/" className="text-white">
-          Digi-Gallery
+          <h3 className="mb-0">Digi-Gallery</h3>
+          <small>Create, Share, &amp; Repeat</small>
         </Link>
-      </h3>
+      </section>
 
       <nav className="navbar navbar-expand-lg navbar-dark">
         <button
@@ -21,21 +22,21 @@ const Header = () => {
 
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item px-1 active">
-              <Link to="/" className="nav-link">
+            <li className="nav-item px-1">
+              <NavLink exact to="/" className="nav-link">
                 Home
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item px-1 dropdown">
-              <Link
-                to="/"
+              <NavLink
+                to="/categories"
                 className="nav-link dropdown-toggle"
                 id="navbarDropdown"
                 role="button"
                 data-toggle="dropdown"
               >
                 Categories
-              </Link>
+              </NavLink>
               <div className="dropdown-menu">
                 <Link to="/categories/automotive" className="dropdown-item">
                   Automotive
@@ -67,27 +68,22 @@ const Header = () => {
               </div>
             </li>
             <li className="nav-item px-1">
-              <Link to="/contributors" className="nav-link">
+              <NavLink to="/contributors" className="nav-link">
                 Contributor List
-              </Link>
+              </NavLink>
             </li>
-            {/* <li className="nav-item px-1">
-              <Link to="/login" className="nav-link">
-                Login
-              </Link>
-            </li> */}
           </ul>
 
           <ul className="navbar-nav ml-auto">
             <li className="nav-item px-1">
-              <Link to="/login" className="nav-link">
+              <NavLink to="/login" className="nav-link">
                 Login
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item px-1">
-              <Link to="/register" className="nav-link">
+              <NavLink to="/register" className="nav-link">
                 Register
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
