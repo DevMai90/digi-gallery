@@ -11,9 +11,9 @@ const Header = () => {
         </Link>
       </section>
 
-      <nav className="navbar navbar-expand-lg navbar-dark">
+      <nav className="navbar navbar-expand-md navbar-dark">
         <button
-          className="navbar-toggler"
+          className="navbar-toggler ml-auto"
           data-toggle="collapse"
           data-target="navbarCollapse"
         >

@@ -2,4 +2,9 @@
 // combineReducers takens in an object of reducing functions. These functions are passed into createStore()
 import { combineReducers } from 'redux';
 
-export default combineReducers({});
+// Reducers
+import alert from './alert';
+
+export default combineReducers({
+  alert
+});
