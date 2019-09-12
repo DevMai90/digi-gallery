@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Alert from '../layout/Alert';
 
-const Register = () => {
+// Connects to redux store
+import { connect } from 'react-redux';
+// Bring in action creator
+import { setAlert } from '../../actions/alert';
+
+// Destructure from props
+const Register = ({ setAlert }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -24,14 +32,18 @@ const Register = () => {
     e.preventDefault();
 
     // Check if passwords match
-    if (password1 !== password2) console.log('Password fields do not match');
+    if (password1 !== password2) {
+      setAlert('Password fields do not match', 'danger');
+    }
   };
+
   return (
     <div id="login">
       <div className="container">
         <div className="row">
           <div className="col-md-6 mx-auto py-3">
             <div className="card">
+              <Alert />
               <h3 className="pt-3 text-center">Registration</h3>
               <p className="text-center">
                 Please fill out the following fields
@@ -112,7 +124,8 @@ const Register = () => {
                   </div>
 
                   <button className="btn btn-primary btn-block py-2">
-                    <i className="fas fa-arrow-circle-right mr-1" /> Sign In
+                    <i className="fas fa-arrow-circle-right mr-1" /> Create
+                    Account
                   </button>
                 </form>
 
@@ -129,4 +142,12 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  // Matching dispatch to props. Allows us to use action creators
+  { setAlert }
+)(Register);

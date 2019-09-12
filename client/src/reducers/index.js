@@ -8,3 +8,7 @@ import alert from './alert';
 export default combineReducers({
   alert
 });
+
+/*
+- Reducers specify how the app's state changes in response to actions passed to the store
+*/
