@@ -7,7 +7,10 @@ const Alert = ({ alert }) => {
   if (alert !== null && alert.length > 0) {
     return alert.map(alert => {
       return (
-        <div className={`bg-${alert.alertType} text-center text-white`}>
+        <div
+          key={alert.id}
+          className={`bg-${alert.alertType} text-center text-white`}
+        >
           <p className="my-2">{alert.msg}</p>
         </div>
       );
@@ -15,6 +18,10 @@ const Alert = ({ alert }) => {
   }
 
   return null;
+};
+
+Alert.propTypes = {
+  alert: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

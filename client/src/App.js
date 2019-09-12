@@ -4,7 +4,6 @@ import Header from './components/layout/Header';
 import Home from './components/homepage/Home';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import Alert from './components/layout/Alert';
 
 // Makes Redux store available to the entire app
 import { Provider } from 'react-redux';
