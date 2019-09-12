@@ -37,6 +37,9 @@ export default App;
 ex
 "/users"
 "/users/create"
-path would only return /users because path returns the FIRST match
-exact path would allow us to access /users/create
+path would only return /users because path returns the FIRST match. (react router does partial matching)
+exact path disables partial matching. so we can just match exact path /users
+path /users/create would not be affected 
+
+Use exact path on any routes that could be included within other routes
 */
