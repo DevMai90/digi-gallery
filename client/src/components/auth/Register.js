@@ -7,7 +7,7 @@ import Alert from '../layout/Alert';
 import { connect } from 'react-redux';
 // Bring in action creator
 import { setAlert } from '../../actions/alert';
-
+import axios from 'axios';
 import validateEmailFormat from '../../utils/validateEmailFormat';
 
 // Destructure from props
@@ -15,13 +15,13 @@ const Register = ({ setAlert }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    password1: '',
+    password: '',
     password2: '',
     email: '',
     handle: ''
   });
 
-  const { firstName, lastName, password1, password2, email, handle } = formData;
+  const { firstName, lastName, password, password2, email, handle } = formData;
 
   const onChange = e => {
     setFormData({
@@ -30,7 +30,7 @@ const Register = ({ setAlert }) => {
     });
   };
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
 
     // Check for empty fields
@@ -45,11 +45,11 @@ const Register = ({ setAlert }) => {
       return setAlert('Please complete all required fields', 'danger');
 
     // Check password length
-    if (password1.length < 6)
+    if (password.length < 6)
       return setAlert('Password must be at least 6 characters long', 'danger');
 
     // Check if passwords match
-    if (password1 !== password2)
+    if (password !== password2)
       return setAlert('Password fields do not match', 'danger');
 
     // Validate email format
@@ -60,7 +60,26 @@ const Register = ({ setAlert }) => {
     if (handle && handle.length < 8)
       return setAlert('Username must be at least 8 characters long', 'danger');
 
-    console.log(formData);
+    try {
+      const newUser = JSON.stringify({
+        firstName,
+        lastName,
+        password,
+        email,
+        handle
+      });
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+
+      const res = await axios.post('/api/users/', newUser, config);
+      console.log(res.data);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   return (
@@ -100,12 +119,12 @@ const Register = ({ setAlert }) => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="password1">Password</label>
+                    <label htmlFor="password">Password</label>
                     <input
                       type="password"
                       className="form-control"
-                      name="password1"
-                      value={password1}
+                      name="password"
+                      value={password}
                       onChange={e => onChange(e)}
                     />
                     <p className="text-muted">
