@@ -56,6 +56,10 @@ const Register = ({ setAlert }) => {
     if (!validateEmailFormat(email))
       return setAlert('Please enter a valid email address', 'danger');
 
+    // Validate handle length
+    if (handle && handle.length < 8)
+      return setAlert('Username must be at least 8 characters long', 'danger');
+
     console.log(formData);
   };
 
