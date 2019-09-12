@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 // Bring in action creator
 import { setAlert } from '../../actions/alert';
 
+import validateEmailFormat from '../../utils/validateEmailFormat';
+
 // Destructure from props
 const Register = ({ setAlert }) => {
   const [formData, setFormData] = useState({
@@ -31,10 +33,30 @@ const Register = ({ setAlert }) => {
   const onSubmit = e => {
     e.preventDefault();
 
-    // Check if passwords match
-    if (password1 !== password2) {
-      setAlert('Password fields do not match', 'danger');
+    // Check for empty fields
+    const errors = [];
+    let field;
+
+    for (field in formData) {
+      if (!formData[field] && field !== 'handle') errors.push(field);
     }
+
+    if (errors.length > 0)
+      return setAlert('Please complete all required fields', 'danger');
+
+    // Check password length
+    if (password1.length < 6)
+      return setAlert('Password must be at least 6 characters long', 'danger');
+
+    // Check if passwords match
+    if (password1 !== password2)
+      return setAlert('Password fields do not match', 'danger');
+
+    // Validate email format
+    if (!validateEmailFormat(email))
+      return setAlert('Please enter a valid email address', 'danger');
+
+    console.log(formData);
   };
 
   return (
@@ -82,6 +104,11 @@ const Register = ({ setAlert }) => {
                       value={password1}
                       onChange={e => onChange(e)}
                     />
+                    <p className="text-muted">
+                      <small>
+                        * Passwords must be at least 6 characters long
+                      </small>
+                    </p>
                   </div>
 
                   <div className="form-group">
@@ -98,7 +125,7 @@ const Register = ({ setAlert }) => {
                   <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input
-                      type="email"
+                      type="text"
                       className="form-control"
                       name="email"
                       value={email}
@@ -117,8 +144,7 @@ const Register = ({ setAlert }) => {
                     />
                     <p className="text-muted">
                       <small>
-                        * If username is not provided then full name is
-                        displayed on posts
+                        * Optional usernames must be at least 8 characters long
                       </small>
                     </p>
                   </div>
