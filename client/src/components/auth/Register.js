@@ -7,11 +7,12 @@ import Alert from '../layout/Alert';
 import { connect } from 'react-redux';
 // Bring in action creator
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 import axios from 'axios';
 import validateEmailFormat from '../../utils/validateEmailFormat';
 
 // Destructure from props
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -61,22 +62,9 @@ const Register = ({ setAlert }) => {
       return setAlert('Username must be at least 8 characters long', 'danger');
 
     try {
-      const newUser = JSON.stringify({
-        firstName,
-        lastName,
-        password,
-        email,
-        handle
-      });
-
-      const config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-
-      const res = await axios.post('/api/users/', newUser, config);
-      console.log(res.data);
+      register(firstName, lastName, password, email, handle);
+      // const res = await axios.post('/api/users/', newUser, config);
+      // console.log(res);
     } catch (error) {
       console.error(error.message);
     }
@@ -192,11 +180,12 @@ const Register = ({ setAlert }) => {
 };
 
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
   // Matching dispatch to props. Allows us to use action creators
-  { setAlert }
+  { setAlert, register }
 )(Register);
