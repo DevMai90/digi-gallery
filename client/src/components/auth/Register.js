@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Alert from '../layout/Alert';
 
-// Connects to redux store
+// Connects React to redux store
 import { connect } from 'react-redux';
-// Bring in action creator
+// Bring in action creators
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
-import axios from 'axios';
 import validateEmailFormat from '../../utils/validateEmailFormat';
 
-// Destructure from props
-const Register = ({ setAlert, register }) => {
+// Destructure from (props)
+const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -61,14 +60,14 @@ const Register = ({ setAlert, register }) => {
     if (handle && handle.length < 8)
       return setAlert('Username must be at least 8 characters long', 'danger');
 
-    try {
-      register(firstName, lastName, password, email, handle);
-      // const res = await axios.post('/api/users/', newUser, config);
-      // console.log(res);
-    } catch (error) {
-      console.error(error.message);
-    }
+    // register action creator
+    register(firstName, lastName, password, email, handle);
   };
+
+  // Redirect authenticated users
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <div id="login">
@@ -83,7 +82,11 @@ const Register = ({ setAlert, register }) => {
               </p>
 
               <div className="container">
-                <form className="m-3" onSubmit={e => onSubmit(e)}>
+                <form
+                  className="m-3"
+                  spellcheck="false"
+                  onSubmit={e => onSubmit(e)}
+                >
                   <div className="form-group">
                     <label htmlFor="firstName">First Name</label>
                     <input
@@ -179,13 +182,19 @@ const Register = ({ setAlert, register }) => {
   );
 };
 
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 export default connect(
-  null,
+  // Taking application state from redux store
+  mapStateToProps,
   // Matching dispatch to props. Allows us to use action creators
   { setAlert, register }
 )(Register);

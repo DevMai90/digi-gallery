@@ -4,6 +4,7 @@ import Header from './components/layout/Header';
 import Home from './components/homepage/Home';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import Dashboard from './components/dashboard/Dashboard';
 
 // Makes Redux store available to the entire app
 import { Provider } from 'react-redux';
@@ -22,6 +23,7 @@ const App = () => {
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/dashboard" component={Dashboard} />
           </Switch>
         </div>
       </Router>
@@ -42,4 +44,9 @@ exact path disables partial matching. so we can just match exact path /users
 path /users/create would not be affected 
 
 Use exact path on any routes that could be included within other routes
+
+Switch will iterate over all of its children Route components. Only render the first one that matches the current location.
+
+Regular route will render every route that matches. Switch will only rear the route that actually matches
+
 */
