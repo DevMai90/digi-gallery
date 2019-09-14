@@ -45,8 +45,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       return setAlert('Please complete all required fields', 'danger');
 
     // Check password length
-    // if (password.length < 6)
-    //   return setAlert('Password must be at least 6 characters long', 'danger');
+    if (password.length < 6)
+      return setAlert('Password must be at least 6 characters long', 'danger');
 
     // Check if passwords match
     if (password !== password2)
@@ -58,7 +58,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
     // Validate handle length
     if (handle && handle.length < 8)
-      return setAlert('Username must be at least 8 characters long', 'danger');
+      return setAlert('Username must be between 8 and 32 characters', 'danger');
 
     // register action creator
     register(firstName, lastName, password, email, handle);

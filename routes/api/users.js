@@ -26,23 +26,21 @@ router.post(
     check('lastName', 'Please enter your last name')
       .not()
       .isEmpty(),
-    check(
-      'password',
-      'Please enter a password with 6 or more characters'
-    ).isLength({ min: 6 }),
-    check('email', 'Please enter a valid email').isEmail(),
+    check('password', 'Password must be at least 6 characters long').isLength({
+      min: 6
+    }),
+    check('email', 'Please enter a valid email address').isEmail(),
     check('about', 'Maximum length allowed is 1,000 characters').isLength({
       max: 1000
     }),
-    check(
-      'handle',
-      'Handle must be greater than 8 characters and less than 32 characters in length'
-    ).custom(value => {
-      if (value !== '') {
-        return value.trim().length >= 8 && value.trim().length <= 32;
+    check('handle', 'Username must be between 8 and 32 characters').custom(
+      value => {
+        if (value !== '') {
+          return value.trim().length >= 8 && value.trim().length <= 32;
+        }
+        return true;
       }
-      return true;
-    })
+    )
   ],
   async (req, res) => {
     // Check if express-validator found any errors
