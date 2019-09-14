@@ -20,13 +20,22 @@ export default function(state = initialState, action) {
   switch (type) {
     case REGISTER_SUCCESS:
       localStorage.setItem('token', payload.token);
-      console.log(payload);
       return {
         ...state,
         ...payload,
         loading: false,
-        isAuthenticated: true,
-        user: '@todo'
+        isAuthenticated: true
+        // user: '@todo'
+      };
+    case REGISTER_FAIL:
+      localStorage.removeItem('token');
+      return {
+        ...state,
+        // Removed token from localStorage, but must also remove from state
+        token: null,
+        loading: false,
+        isAuthenticated: false,
+        user: null
       };
     default:
       return state;

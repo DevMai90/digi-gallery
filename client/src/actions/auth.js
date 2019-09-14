@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { REGISTER_SUCCESS, REGISTER_FAIL } from './types';
+import { setAlert } from './alert';
 
 export const register = (
   firstName,
@@ -33,6 +34,10 @@ export const register = (
       payload: res.data
     });
   } catch (err) {
-    console.log(err);
+    // Return errors array from express-validator in backend
+    const errors = err.response.data.errors;
+
+    // Send errors to Redux
+    errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
   }
 };

@@ -45,8 +45,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       return setAlert('Please complete all required fields', 'danger');
 
     // Check password length
-    if (password.length < 6)
-      return setAlert('Password must be at least 6 characters long', 'danger');
+    // if (password.length < 6)
+    //   return setAlert('Password must be at least 6 characters long', 'danger');
 
     // Check if passwords match
     if (password !== password2)
@@ -84,7 +84,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               <div className="container">
                 <form
                   className="m-3"
-                  spellcheck="false"
+                  spellCheck="false"
                   onSubmit={e => onSubmit(e)}
                 >
                   <div className="form-group">
