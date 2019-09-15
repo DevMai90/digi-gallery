@@ -1,3 +1,7 @@
+#authenticate {
+  background: #fff;
+}
+
 body {
   background-image: url('https://digi-gallery.s3-us-west-1.amazonaws.com/theme/background-top.jpg');
   background-repeat: no-repeat;
@@ -15,14 +19,6 @@ body {
   background: rgba(0, 0, 0, 0.5);
 }
 
-#homepage {
-  background: #fff;
-}
-
-#login {
-  background: #fff;
-}
-
 @media (min-width: 1200px) {
   .contain {
     width: 1200px !important;
@@ -32,4 +28,8 @@ body {
 
 nav {
   background: linear-gradient(180deg, #333, #000);
+}
+
+#notFound {
+  background: #fff;
 }

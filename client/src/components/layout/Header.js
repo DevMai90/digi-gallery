@@ -9,14 +9,14 @@ const Header = ({ auth: { loading, isAuthenticated } }) => {
   const authLinks = (
     <Fragment>
       <li className="nav-item px-1">
-        <NavLink to="/profile" className="nav-link">
-          Profile
+        <NavLink to="/dashboard" className="nav-link">
+          Dashboard
         </NavLink>
       </li>
       <li className="nav-item px-1">
-        <NavLink to="/dashboard" className="nav-link">
+        <Link to="/" className="nav-link">
           Logout
-        </NavLink>
+        </Link>
       </li>
     </Fragment>
   );

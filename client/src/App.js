@@ -5,6 +5,7 @@ import Home from './components/homepage/Home';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
+import NotFound from './components/layout/NotFound';
 
 // Makes Redux store available to the entire app
 import { Provider } from 'react-redux';
@@ -21,11 +22,12 @@ const App = () => {
       <Router>
         <div className="contain">
           <Header />
-          <Route exact path="/" component={Home} />
           <Switch>
+            <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/dashboard" component={Dashboard} />
+            <Route component={NotFound} />
           </Switch>
         </div>
       </Router>
