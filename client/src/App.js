@@ -12,7 +12,7 @@ import store from '../src/store';
 
 import './App.css';
 
-// Must check our token to see if we have one. If we do then return user. Then set loading to false after
+// Must check our token to see if we have one. If we do then return user. Then set loading to false after. Update state
 
 const App = () => {
   return (

@@ -108,12 +108,7 @@ const Header = ({ auth: { loading, isAuthenticated } }) => {
           </ul>
 
           <ul className="navbar-nav ml-auto">
-            {/* {!loading && isAuthenticated ? authLinks : guestLink} */}
-            {/* Check if loading */}
-            {!loading && (
-              // Check if authenticated
-              <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
-            )}
+            {isAuthenticated ? authLinks : guestLinks}
           </ul>
         </div>
       </nav>

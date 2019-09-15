@@ -32,7 +32,7 @@ export const register = (
 
   try {
     // Hit backend route, send req info, configure headers
-    // Save response
+    // Save response which is our token (see backend)
     const res = await axios.post('/api/users/', body, config);
 
     // Dispatch action which is just an object

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Alert from '../layout/Alert';
 
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/auth';
+import { setAlert } from '../../actions/alert';
 
-const Login = ({ loginUser, alert }) => {
+const Login = ({ loginUser, alert, setAlert, auth: { isAuthenticated } }) => {
   // Local state
   const [formData, setFormData] = useState({
     login: '',
@@ -27,9 +28,20 @@ const Login = ({ loginUser, alert }) => {
     e.preventDefault();
 
     // Frontend input validation
+    if (!login)
+      return setAlert(
+        'Please enter a registered email address or username',
+        'danger'
+      );
+
+    if (!password) return setAlert('Please enter a valid password', 'danger');
 
     loginUser(login, password);
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <div id="login">
@@ -92,12 +104,18 @@ const Login = ({ loginUser, alert }) => {
 };
 
 // PropTypes
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  alert: PropTypes.array.isRequired,
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
-  alert: state.alert
+  alert: state.alert,
+  auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  { loginUser }
+  { loginUser, setAlert }
 )(Login);
