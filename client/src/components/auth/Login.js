@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Alert from '../layout/Alert';
 
-const Login = () => {
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/auth';
+
+const Login = ({ loginUser, alert }) => {
   // Local state
   const [formData, setFormData] = useState({
     login: '',
@@ -20,6 +25,10 @@ const Login = () => {
   // Handle Submit
   const onSubmit = e => {
     e.preventDefault();
+
+    // Frontend input validation
+
+    loginUser(login, password);
   };
 
   return (
@@ -28,11 +37,16 @@ const Login = () => {
         <div className="row">
           <div className="col-md-6 mx-auto py-3">
             <div className="card">
+              {alert && <Alert />}
               <h3 className="pt-3 text-center">Sign In</h3>
               <p className="text-center">Create, Share, &amp; Repeat</p>
 
               <div className="container">
-                <form className="m-3" onSubmit={e => onSubmit(e)}>
+                <form
+                  className="m-3"
+                  spellCheck="false"
+                  onSubmit={e => onSubmit(e)}
+                >
                   <div className="form-group">
                     <label htmlFor="login">Email or Username</label>
                     <input
@@ -47,7 +61,7 @@ const Login = () => {
                   <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <input
-                      type="text"
+                      type="password"
                       className="form-control"
                       name="password"
                       value={password}
@@ -77,4 +91,13 @@ const Login = () => {
   );
 };
 
-export default Login;
+// PropTypes
+
+const mapStateToProps = state => ({
+  alert: state.alert
+});
+
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(Login);
