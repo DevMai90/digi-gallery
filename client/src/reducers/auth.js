@@ -2,7 +2,8 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   LOGIN_SUCCESS,
-  LOGIN_FAIL
+  LOGIN_FAIL,
+  LOGOUT
 } from '../actions/types';
 
 // Check local storage to see if we already have an auth token
@@ -35,6 +36,7 @@ export default function(state = initialState, action) {
       };
     case REGISTER_FAIL:
     case LOGIN_FAIL:
+    case LOGOUT:
       localStorage.removeItem('token');
       return {
         ...state,

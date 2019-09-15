@@ -3,7 +3,8 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   LOGIN_SUCCESS,
-  LOGIN_FAIL
+  LOGIN_FAIL,
+  LOGOUT
 } from './types';
 import { setAlert } from './alert';
 
@@ -86,4 +87,10 @@ export const loginUser = (login, password) => async dispatch => {
       type: LOGIN_FAIL
     });
   }
+};
+
+export const logout = () => dispatch => {
+  dispatch({
+    type: LOGOUT
+  });
 };

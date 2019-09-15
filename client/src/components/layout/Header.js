@@ -3,8 +3,9 @@ import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
+import { logout } from '../../actions/auth';
 
-const Header = ({ auth: { loading, isAuthenticated } }) => {
+const Header = ({ auth: { loading, isAuthenticated }, logout }) => {
   // Need links for users that are logged in or not
   const authLinks = (
     <Fragment>
@@ -14,7 +15,7 @@ const Header = ({ auth: { loading, isAuthenticated } }) => {
         </NavLink>
       </li>
       <li className="nav-item px-1">
-        <Link to="/" className="nav-link">
+        <Link to="/" className="nav-link" onClick={e => logout()}>
           Logout
         </Link>
       </li>
@@ -117,7 +118,8 @@ const Header = ({ auth: { loading, isAuthenticated } }) => {
 };
 
 Header.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -126,5 +128,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null
+  { logout }
 )(Header);
