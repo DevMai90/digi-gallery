@@ -70,7 +70,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   }
 
   return (
-    <div id="login">
+    <div id="authenticate">
       <div className="container">
         <div className="row">
           <div className="col-md-6 mx-auto py-3">

@@ -40,11 +40,11 @@ const Login = ({ loginUser, alert, setAlert, auth: { isAuthenticated } }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/" />;
   }
 
   return (
-    <div id="login">
+    <div id="authenticate">
       <div className="container">
         <div className="row">
           <div className="col-md-6 mx-auto py-3">
