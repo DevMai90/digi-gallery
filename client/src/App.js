@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Home from './components/homepage/Home';
@@ -9,13 +9,25 @@ import NotFound from './components/layout/NotFound';
 
 // Makes Redux store available to the entire app
 import { Provider } from 'react-redux';
-import store from '../src/store';
+import store from './store';
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
 
 import './App.css';
 
 // Must check our token to see if we have one. If we do then return user. Then set loading to false after. Update state
 
+// If token then set auth token. Which is allow us to user loadUser action creator
+if (localStorage.token) setAuthToken(localStorage.token);
+
 const App = () => {
+  // loadUser is available directly through the store since we've imported it here. No need for connect()
+
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+  // Empty brackets indicate that there is nothing that will cause loadUser to re-run.
+
   return (
     // Provider wraps around EVERYTHING
     <Provider store={store}>

@@ -3,7 +3,9 @@ import {
   REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
+  USER_LOADED,
+  AUTH_ERROR
 } from '../actions/types';
 
 // Check local storage to see if we already have an auth token
@@ -34,9 +36,17 @@ export default function(state = initialState, action) {
         isAuthenticated: true
         // user: '@todo'
       };
+    case USER_LOADED:
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: true,
+        user: payload
+      };
     case REGISTER_FAIL:
     case LOGIN_FAIL:
     case LOGOUT:
+    case AUTH_ERROR:
       localStorage.removeItem('token');
       return {
         ...state,
