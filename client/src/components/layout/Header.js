@@ -15,7 +15,7 @@ const Header = ({ auth: { loading, isAuthenticated }, logout }) => {
         </NavLink>
       </li>
       <li className="nav-item px-1">
-        <Link to="/" className="nav-link" onClick={e => logout()}>
+        <Link to="/login" className="nav-link" onClick={e => logout()}>
           Logout
         </Link>
       </li>

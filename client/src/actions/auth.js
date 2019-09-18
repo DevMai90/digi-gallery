@@ -4,9 +4,41 @@ import {
   REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
+  USER_LOADED,
+  AUTH_ERROR
 } from './types';
 import { setAlert } from './alert';
+import setAuthToken from '../utils/setAuthToken';
+
+// Must send token we have on client side to backend to validate then load user.
+// Client JWT will have req.user.id as payload. Compare this through the backend auth route to send back user
+// Must do this each time app.js is loaded.
+export const loadUser = () => async dispatch => {
+  // If there is a token in local storage...
+  // if (localStorage.getItem('token')) {
+  // Then set or clear axios header...
+  // setAuthToken(localStorage.getItem('token'));
+  // }
+  if (localStorage.token) setAuthToken(localStorage.token);
+
+  try {
+    // Send GET request to backend route. Note that headers have been set with the token
+    const res = await axios.get('/api/auth');
+
+    // Send action to reducer in order to update state
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data
+    });
+  } catch (err) {
+    // If there is an error then send action to auth reducer
+    dispatch({
+      type: AUTH_ERROR
+    });
+    // Not looping through errors because we did not add errors to this backend route
+  }
+};
 
 export const register = (
   firstName,

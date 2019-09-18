@@ -15,6 +15,7 @@ const User = require('../../models/User');
 // @access  Private
 
 // This route is now protected because we added the auth middleware
+// auth middleware will validate the token sent from client
 router.get('/', auth, async (req, res) => {
   try {
     // Mongoose methods return a promise. Must resolve
