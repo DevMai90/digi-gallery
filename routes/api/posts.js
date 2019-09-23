@@ -122,10 +122,10 @@ router.get('/user/:userid', async (req, res) => {
   }
 });
 
-// @route   GET /api/posts/:postid
+// @route   GET /api/posts/post/:postid
 // @desc    Get single post by id
 // @access  Public
-router.get('/:postid', async (req, res) => {
+router.get('/post/:postid', async (req, res) => {
   try {
     // let post = await Post.findById(req.params.postid);
     let post = await Post.findOneAndUpdate(
@@ -417,6 +417,28 @@ router.delete('/comment/:postid/:commentid', auth, async (req, res) => {
 
     // Return response
     res.json(post);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   GET /api/posts/homepage
+// @desc    Get initial 15 posts then add 6 posts.
+// @access  Public
+router.get('/homepage', async (req, res) => {
+  // Send post limit and skip count as part of req.body
+  const { limit, skip } = req.body;
+  try {
+    // Query - Return posts in descending order
+    // Sort descending
+    let posts = await Post.find()
+      .sort({ date: -1 })
+      .select('-postText')
+      .limit(parseInt(limit))
+      .skip(parseInt(skip));
+
+    res.send(posts);
   } catch (err) {
     console.log(err.message);
     res.status(500).send('Server Error');

@@ -34,13 +34,15 @@ const App = () => {
       <Router>
         <div className="contain">
           <Header />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route component={NotFound} />
-          </Switch>
+          <div className="bg-light">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route component={NotFound} />
+            </Switch>
+          </div>
         </div>
       </Router>
     </Provider>
