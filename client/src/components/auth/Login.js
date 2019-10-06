@@ -14,6 +14,8 @@ const Login = ({ loginUser, alert, setAlert, auth: { isAuthenticated } }) => {
     password: ''
   });
 
+  // use local state to see how many articles we've downloaded?
+
   // Destructure
   const { login, password } = formData;
 
