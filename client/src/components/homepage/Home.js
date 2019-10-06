@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MainArticle from './MainArticle';
+import SecondaryArticles from './SecondaryArticles';
+import TertiaryArticles from './TertiaryArticles';
 
 import { connect } from 'react-redux';
 import { getHomePosts } from '../../actions/post';
@@ -21,6 +23,8 @@ const Home = ({ getHomePosts }) => {
   return (
     <div id="homepage">
       <MainArticle />
+      <SecondaryArticles />
+      <TertiaryArticles />
     </div>
   );
 };
