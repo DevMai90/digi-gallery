@@ -8,6 +8,12 @@
   /* width: 100%; */
   /* vertical-align: middle; */
 }
+
+.secondary-article img {
+  max-width: 100%;
+  height: 350px;
+}
+
 #authenticate {
   background: #fff;
 }
