@@ -1,3 +1,13 @@
+/* Articles */
+.main-article img {
+  max-width: 100%;
+  max-height: 100%;
+  /* margin-left: auto;
+  margin-right: auto; */
+  margin-bottom: 30px;
+  /* width: 100%; */
+  /* vertical-align: middle; */
+}
 #authenticate {
   background: #fff;
 }
@@ -15,15 +25,13 @@ body {
   margin: 0.5rem;
 }
 
-#header-logo {
-  background: rgba(0, 0, 0, 0.5);
+.container {
+  max-width: 1200px;
+  margin: auto;
 }
 
-@media (min-width: 1200px) {
-  .contain {
-    width: 1200px !important;
-    margin: auto;
-  }
+#header-logo {
+  background: rgba(0, 0, 0, 0.5);
 }
 
 nav {

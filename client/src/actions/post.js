@@ -9,7 +9,7 @@ export const getHomePosts = limits => async dispatch => {
         'Content-Type': 'application/json'
       }
     };
-    const res = await axios.get('/api/posts/homepage', limits, config);
+    const res = await axios.get('/api/posts/homepage');
 
     dispatch({
       type: GET_HOME,

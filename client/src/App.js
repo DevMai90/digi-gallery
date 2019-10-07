@@ -32,7 +32,7 @@ const App = () => {
     // Provider wraps around EVERYTHING
     <Provider store={store}>
       <Router>
-        <div className="contain">
+        <div className="container">
           <Header />
           <div className="bg-light">
             <Switch>
