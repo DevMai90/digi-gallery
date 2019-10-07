@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 
-const MainArticle = ({ post, loading }) => {
+const MainArticle = ({ post }) => {
   const {
     image,
     category,
@@ -36,6 +36,10 @@ const MainArticle = ({ post, loading }) => {
       </div>
     </div>
   );
+};
+
+MainArticle.propTypes = {
+  post: PropTypes.object.isRequired
 };
 
 export default MainArticle;
