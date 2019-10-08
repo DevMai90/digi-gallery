@@ -3,17 +3,7 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 
 const MainArticle = ({ post }) => {
-  const {
-    image,
-    category,
-    date,
-    firstName,
-    lastName,
-    handle,
-    title,
-    comments,
-    likes
-  } = post;
+  const { image, category, date, title, comments, likes } = post;
   return (
     <div className="row no-gutters main-article">
       <img src={image} alt="" />
@@ -24,8 +14,7 @@ const MainArticle = ({ post }) => {
         <h1>
           <strong>{title}</strong>
         </h1>
-        <span>
-          <strong>{handle ? handle : `${firstName} ${lastName}`}</strong>/{' '}
+        <span className="text-muted">
           <Moment format="MMMM Do YYYY">{date}</Moment> /{' '}
           <i className="fas fa-comments text-success"></i> {comments.length} /{' '}
           <i className="fas fa-thumbs-up text-primary"></i> {likes.length}
