@@ -11,9 +11,7 @@ const MainArticle = ({ post }) => {
         {category.toUpperCase()}
       </span>
       <div className="col-md-12 text-center p-2">
-        <h1>
-          <strong>{title}</strong>
-        </h1>
+        <h1>{title}</h1>
         <span className="text-muted">
           <Moment format="MMMM Do YYYY">{date}</Moment> /{' '}
           <i className="fas fa-comments text-success"></i> {comments.length} /{' '}

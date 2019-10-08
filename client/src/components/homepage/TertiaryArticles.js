@@ -11,9 +11,7 @@ const TertiaryArticles = ({ post }) => {
         <div className="p-3">
           <img src={image} alt="" className="mb-2" />
           <span className="d-block text-danger">{category.toUpperCase()}</span>
-          <h3>
-            <strong>{title}</strong>
-          </h3>
+          <h3>{title}</h3>
           <span className="text-muted">
             <Moment format="MMMM Do YYYY">{date}</Moment> /{' '}
             <i className="fas fa-comments text-success"></i> {comments.length}{' '}
@@ -23,7 +21,7 @@ const TertiaryArticles = ({ post }) => {
       </div>
     );
   });
-  return <div className="row no-gutters secondary-article">{tertiary}</div>;
+  return <div className="row no-gutters tertiary-article">{tertiary}</div>;
 };
 
 TertiaryArticles.propTypes = {
