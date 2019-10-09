@@ -102,8 +102,13 @@ const Header = ({ auth: { loading, isAuthenticated }, logout }) => {
               </div>
             </li>
             <li className="nav-item px-1">
+              <NavLink to="/posts" className="nav-link">
+                Posts
+              </NavLink>
+            </li>
+            <li className="nav-item px-1">
               <NavLink to="/contributors" className="nav-link">
-                Contributor List
+                Contributors
               </NavLink>
             </li>
           </ul>

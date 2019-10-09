@@ -7,7 +7,7 @@ const TertiaryArticles = ({ post }) => {
     const { image, category, date, title, comments, likes } = item;
 
     return (
-      <div key={index} className="col-md-4">
+      <div key={index} className="col-md-4 my-2">
         <div className="p-3">
           <img src={image} alt="" className="mb-2" />
           <span className="d-block text-danger">{category.toUpperCase()}</span>

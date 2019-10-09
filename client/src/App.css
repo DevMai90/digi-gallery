@@ -10,7 +10,7 @@
 }
 
 .main-article h1 {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .secondary-article img {
@@ -19,7 +19,7 @@
 }
 
 .secondary-article h2 {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .tertiary-article img {
@@ -28,7 +28,14 @@
 }
 
 .tertiary-article h3 {
-  font-weight: bold;
+  font-weight: 500;
+}
+
+.get-more-posts {
+  background-color: #ed6964;
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 0.5rem 4rem;
 }
 
 #authenticate {

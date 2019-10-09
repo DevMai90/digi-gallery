@@ -31,6 +31,9 @@ const Home = ({ post: { posts, loading }, getHomePosts }) => {
           <MainArticle post={posts[0]} />
           <SecondaryArticles post={posts.slice(1, 3)} />
           <TertiaryArticles post={posts.slice(3)} />
+          <div className="d-flex justify-content-center p-3">
+            <button className="btn get-more-posts">See More Posts</button>
+          </div>
         </Fragment>
       )}
     </div>
