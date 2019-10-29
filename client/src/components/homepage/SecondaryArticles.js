@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
+import style from './styles.module.css';
+
 const SecondaryArticles = ({ post }) => {
   const secondary = post.map((item, index) => {
     const { image, category, date, title, comments, likes } = item;
@@ -9,9 +11,9 @@ const SecondaryArticles = ({ post }) => {
     return (
       <div key={index} className="col-md-6">
         <div className="p-3">
-          <img src={image} alt="" className="mb-2" />
+          <img src={image} alt="" className={`${style.secondaryImg} mb-2`} />
           <span className="d-block text-danger">{category.toUpperCase()}</span>
-          <h2>{title}</h2>
+          <h2 className={style.secondaryTitle}>{title}</h2>
           <span className="text-muted">
             <Moment format="MMMM Do YYYY">{date}</Moment> /{' '}
             <i className="fas fa-comments text-success"></i> {comments.length}{' '}
@@ -21,7 +23,7 @@ const SecondaryArticles = ({ post }) => {
       </div>
     );
   });
-  return <div className="row no-gutters secondary-article">{secondary}</div>;
+  return <div className="row no-gutters">{secondary}</div>;
 };
 
 SecondaryArticles.propTypes = {
