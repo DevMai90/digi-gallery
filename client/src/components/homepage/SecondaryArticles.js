@@ -11,9 +11,9 @@ const SecondaryArticles = ({ post }) => {
     return (
       <div key={index} className="col-md-6">
         <div className="p-3">
-          <img src={image} alt="" className={`${style.secondaryImg} mb-2`} />
+          <img src={image} alt="" className={`${style.secondary} mb-2`} />
           <span className="d-block text-danger">{category.toUpperCase()}</span>
-          <h2 className={style.secondaryTitle}>{title}</h2>
+          <h2>{title}</h2>
           <span className="text-muted">
             <Moment format="MMMM Do YYYY">{date}</Moment> /{' '}
             <i className="fas fa-comments text-success"></i> {comments.length}{' '}

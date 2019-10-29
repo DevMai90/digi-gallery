@@ -1,27 +1,27 @@
-.mainImg {
+.main {
   max-width: 100%;
   max-height: 100%;
   margin-bottom: 30px;
 }
 
-.title {
+h1 {
   font-weight: 600;
 }
 
-.secondaryImg {
+h2 {
+  font-weight: 500;
+}
+
+h3 {
+  font-weight: 500;
+}
+
+.secondary {
   max-width: 100%;
   height: 350px;
 }
 
-.secondaryTitle {
-  font-weight: 500;
-}
-
-.tertiaryImg {
+.tertiary {
   max-width: 100%;
   height: 250px;
-}
-
-.tertiaryTitle {
-  font-weight: 500;
 }

@@ -11,9 +11,9 @@ const TertiaryArticles = ({ post }) => {
     return (
       <div key={index} className="col-md-4 my-2">
         <div className="p-3">
-          <img src={image} alt="" className={`${style.tertiaryImg} mb-2`} />
+          <img src={image} alt="" className={`${style.tertiary} mb-2`} />
           <span className="d-block text-danger">{category.toUpperCase()}</span>
-          <h3 className={style.tertiaryTitle}>{title}</h3>
+          <h3>{title}</h3>
           <span className="text-muted">
             <Moment format="MMMM Do YYYY">{date}</Moment> /{' '}
             <i className="fas fa-comments text-success"></i> {comments.length}{' '}
