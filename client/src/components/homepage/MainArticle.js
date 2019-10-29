@@ -7,13 +7,13 @@ import style from './styles.module.css';
 const MainArticle = ({ post }) => {
   const { image, category, date, title, comments, likes } = post;
   return (
-    <div className="row no-gutters main-article">
-      <img className={style.main} src={image} alt="" />
+    <div className="row no-gutters">
+      <img className={style['main-img']} src={image} alt="" />
       <span className="mx-auto text-danger d-block">
         {category.toUpperCase()}
       </span>
       <div className="col-md-12 text-center p-2">
-        <h1>{title}</h1>
+        <h1 className={style['main-title']}>{title}</h1>
         <span className="text-muted">
           <Moment format="MMMM Do YYYY">{date}</Moment> /{' '}
           <i className="fas fa-comments text-success"></i> {comments.length} /{' '}
