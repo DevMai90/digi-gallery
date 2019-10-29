@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
-import style from './styles.module.css';
+import style from './Home.module.css';
 
 const SecondaryArticles = ({ post }) => {
   const secondary = post.map((item, index) => {

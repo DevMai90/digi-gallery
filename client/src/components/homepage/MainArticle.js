@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 
-import style from './styles.module.css';
+import style from './Home.module.css';
 
 const MainArticle = ({ post }) => {
   const { image, category, date, title, comments, likes } = post;
