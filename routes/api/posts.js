@@ -113,7 +113,7 @@ router.get('/user/:userid', async (req, res) => {
   try {
     // req.params contains route parameters in the path portion of the URL.
     // The : makes it accessible with req.params
-    let posts = await Post.find({ user: req.params.userid });
+    let posts = await Post.find({ user: req.params.userid }).sort({ date: -1 });
 
     res.json(posts);
   } catch (err) {
