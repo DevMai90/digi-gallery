@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 
+import style from './DashboardTable.module.css';
+
 const DashboardTable = ({ posts }) => {
   const postsDisplay = posts.map((post, index) => {
     const { _id, title, category, date, likes, views, comments } = post;
     return (
-      <tr key={_id}>
+      <tr key={_id} className={style['content']}>
         <td scope="row">{index + 1}</td>
         <td>{title}</td>
         <td>{category}</td>
@@ -22,8 +24,10 @@ const DashboardTable = ({ posts }) => {
   return (
     <div className="row">
       <div className="col-md-12">
-        <table className="table">
-          <thead>
+        <table
+          className={`table table-hover table-light ${style['table-border']}`}
+        >
+          <thead className="thead-light">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Title</th>
