@@ -1,4 +1,4 @@
-import { GET_HOME, POST_ERROR } from '../actions/types';
+import { GET_HOME, POST_ERROR, GET_USER_POSTS } from '../actions/types';
 
 const initialState = {
   posts: [],
@@ -14,14 +14,20 @@ export default function(state = initialState, action) {
     case GET_HOME:
       return {
         ...state,
-        posts: payload,
-        loading: false
+        loading: false,
+        posts: payload
       };
     case POST_ERROR:
       return {
         ...state,
         loading: false,
         errors: payload
+      };
+    case GET_USER_POSTS:
+      return {
+        ...state,
+        loading: false,
+        posts: payload
       };
     default:
       return state;

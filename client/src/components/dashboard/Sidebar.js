@@ -21,7 +21,7 @@ const Sidebar = ({ user }) => {
 };
 
 Sidebar.propTypes = {
-  auth: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired
 };
 
 export default Sidebar;

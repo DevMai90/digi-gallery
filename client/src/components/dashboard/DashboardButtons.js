@@ -5,7 +5,7 @@ import style from './DashboardButtons.module.css';
 
 const DashboardButtons = () => {
   return (
-    <div className="row mt-2">
+    <div className="row my-2">
       <div className="col-md-3">
         <Link to="/add-post" className={style['button']}>
           Add New Post
