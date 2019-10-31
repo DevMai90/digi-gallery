@@ -8,7 +8,7 @@ import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
 import { getUserPosts } from '../../actions/post';
 
-const Dashboard = ({ auth: { loading, user }, getUserPosts }) => {
+const Dashboard = ({ auth: { loading, user }, posts, getUserPosts }) => {
   useEffect(() => {
     user && getUserPosts(user._id);
   }, [getUserPosts, user]);
@@ -24,7 +24,7 @@ const Dashboard = ({ auth: { loading, user }, getUserPosts }) => {
 
         <div className="col-md-9">
           <DashboardButtons />
-          <DashboardTable />
+          <DashboardTable posts={posts} />
         </div>
       </div>
     </div>
@@ -37,7 +37,8 @@ Dashboard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  posts: state.post.posts
 });
 
 export default connect(
