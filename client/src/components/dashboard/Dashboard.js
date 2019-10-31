@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Sidebar from './Sidebar';
+import DashboardButtons from './DashboardButtons';
 import Spinner from '../layout/Spinner';
 
 import { connect } from 'react-redux';
@@ -16,9 +17,7 @@ const Dashboard = ({ auth: { loading, user } }) => {
         </div>
 
         <div className="col-md-9">
-          <div className="bg-primary">
-            <h1>Dashboard</h1>
-          </div>
+          <DashboardButtons />
         </div>
       </div>
     </div>

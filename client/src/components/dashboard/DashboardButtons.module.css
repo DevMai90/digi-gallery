@@ -1,0 +1,20 @@
+.button {
+  background-color: #ed6964;
+  border: 0.1rem solid #ed6964;
+  border-radius: 0.2rem;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
+
+.button:hover {
+  border: 0.1rem solid #e4433e;
+  color: #fff;
+  filter: brightness(0.9);
+  text-decoration: none;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
