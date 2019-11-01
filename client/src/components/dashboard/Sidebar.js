@@ -11,11 +11,11 @@ const Sidebar = ({ user }) => {
         <img src={avatar} alt="" className={` ${style['round']}`} />
         <div>{handle ? handle : `${firstName} ${lastName}`}</div>
       </div>
-      <div className=" p-2">View Posts</div>
-      <div className=" p-2">View Profile</div>
-      <div className=" p-2">Settings</div>
+      <div className="p-2">View Posts</div>
+      <div className="p-2">View Profile</div>
+      <div className="p-2">Settings</div>
       {/* Collapse sidebar option? */}
-      <div className=" p-2">Collapse Sidebar?</div>
+      <div className="p-2">Collapse Sidebar?</div>
     </div>
   );
 };
