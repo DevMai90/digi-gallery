@@ -72,6 +72,9 @@ const Header = ({ auth: { loading, isAuthenticated }, logout }) => {
                 Categories
               </NavLink>
               <div className="dropdown-menu">
+                <Link to="/categories/all" className="dropdown-item">
+                  All
+                </Link>
                 <Link to="/categories/automotive" className="dropdown-item">
                   Automotive
                 </Link>
@@ -101,11 +104,11 @@ const Header = ({ auth: { loading, isAuthenticated }, logout }) => {
                 </Link>
               </div>
             </li>
-            <li className="nav-item px-1">
+            {/* <li className="nav-item px-1">
               <NavLink to="/posts" className="nav-link">
                 Posts
               </NavLink>
-            </li>
+            </li> */}
             <li className="nav-item px-1">
               <NavLink to="/contributors" className="nav-link">
                 Contributors

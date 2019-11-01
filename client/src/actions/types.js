@@ -10,3 +10,4 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const GET_HOME = 'GET_HOME';
 export const POST_ERROR = 'POST_ERROR';
 export const GET_USER_POSTS = 'GET_USER_POSTS';
+export const GET_POSTS = 'GET_POSTS';
