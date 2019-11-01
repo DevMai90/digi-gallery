@@ -5,7 +5,7 @@ import Home from './components/homepage/Home';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
-import Categories from './components/Categories/Categories';
+import Categories from './components/categories/Categories';
 import NotFound from './components/layout/NotFound';
 
 // Makes Redux store available to the entire app

@@ -1,4 +1,10 @@
-import { GET_HOME, POST_ERROR, GET_USER_POSTS, GET_POSTS } from './types';
+import {
+  GET_HOME,
+  POST_ERROR,
+  GET_USER_POSTS,
+  GET_POSTS,
+  CLEAR_POSTS
+} from './types';
 import axios from 'axios';
 
 // Get the most recent 15 posts
@@ -40,6 +46,10 @@ export const getUserPosts = id => async dispatch => {
 };
 
 export const getPosts = () => async dispatch => {
+  dispatch({
+    type: CLEAR_POSTS
+  });
+
   try {
     const res = await axios.get('/api/posts');
 

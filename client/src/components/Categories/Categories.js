@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import PostsDisplay from './PostsDisplay';
+import Spinner from '../layout/Spinner';
 
 import { connect } from 'react-redux';
 import { getPosts } from '../../actions/post';
 
 import capitalizeWord from '../../utils/capitalizeWord';
 
-const Categories = ({ match, getPosts }) => {
+const Categories = ({ post: { posts, loading }, getPosts, match }) => {
   useEffect(() => {
     getPosts();
   }, [getPosts]);
+
   return (
     <div className="container">
       <div className="row">
@@ -20,20 +23,19 @@ const Categories = ({ match, getPosts }) => {
           </header>
         </div>
       </div>
-
-      <div className="row"></div>
+      {loading || !posts.length ? <Spinner /> : <PostsDisplay posts={posts} />}
     </div>
   );
 };
 
 Categories.propTypes = {
-  posts: PropTypes.array.isRequired,
+  post: PropTypes.object.isRequired,
   getPosts: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  posts: state.post.posts
+  post: state.post
 });
 
 export default connect(

@@ -2,7 +2,8 @@ import {
   GET_HOME,
   POST_ERROR,
   GET_USER_POSTS,
-  GET_POSTS
+  GET_POSTS,
+  CLEAR_POSTS
 } from '../actions/types';
 
 const initialState = {
@@ -34,6 +35,13 @@ export default function(state = initialState, action) {
         ...state,
         loading: false,
         posts: payload
+      };
+    case CLEAR_POSTS:
+      return {
+        posts: [],
+        post: null,
+        loading: true,
+        errors: {}
       };
     default:
       return state;
