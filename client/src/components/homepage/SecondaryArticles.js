@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
@@ -31,7 +31,7 @@ const SecondaryArticles = ({ post }) => {
 };
 
 SecondaryArticles.propTypes = {
-  post: PropTypes.object.isRequired
+  post: PropTypes.array.isRequired
 };
 
 export default SecondaryArticles;

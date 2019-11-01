@@ -10,11 +10,11 @@ import axios from 'axios';
 // Get the most recent 15 posts
 export const getHomePosts = limits => async dispatch => {
   try {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
+    // const config = {
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // };
     const res = await axios.get('/api/posts/homepage');
 
     dispatch({

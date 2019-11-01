@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import MainArticle from './MainArticle';
 import SecondaryArticles from './SecondaryArticles';
@@ -20,7 +20,7 @@ const Home = ({ post: { posts, loading }, getHomePosts }) => {
     };
 
     getHomePosts(limits);
-  }, []);
+  }, [getHomePosts]);
 
   return (
     <div id="homepage">
@@ -38,6 +38,10 @@ const Home = ({ post: { posts, loading }, getHomePosts }) => {
       )}
     </div>
   );
+};
+
+Home.propTypes = {
+  post: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

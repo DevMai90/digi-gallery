@@ -27,7 +27,7 @@ const TertiaryArticles = ({ post }) => {
 };
 
 TertiaryArticles.propTypes = {
-  post: PropTypes.object.isRequired
+  post: PropTypes.array.isRequired
 };
 
 export default TertiaryArticles;

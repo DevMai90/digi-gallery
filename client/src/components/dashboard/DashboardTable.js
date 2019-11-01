@@ -9,7 +9,7 @@ const DashboardTable = ({ posts }) => {
     const { _id, title, category, date, likes, views, comments } = post;
     return (
       <tr key={_id} className={style['content']}>
-        <td scope="row">{index + 1}</td>
+        <td>{index + 1}</td>
         <td>{title}</td>
         <td>{category}</td>
         <td>
