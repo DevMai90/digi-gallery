@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getPosts } from '../../actions/post';
 
+import capitalizeWord from '../../utils/capitalizeWord';
+
 const Categories = ({ match, getPosts }) => {
   useEffect(() => {
     getPosts();
@@ -38,5 +40,3 @@ export default connect(
   mapStateToProps,
   { getPosts }
 )(Categories);
-
-const capitalizeWord = word => word.charAt(0).toUpperCase() + word.slice(1);
