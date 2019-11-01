@@ -18,11 +18,11 @@ const Dashboard = ({ auth: { loading, user }, posts, getUserPosts }) => {
   ) : (
     <div className="container">
       <div className="row">
-        <div className="col-md-3 px-0">
+        <div className="col-lg-3 px-0">
           <Sidebar user={user} />
         </div>
 
-        <div className="col-md-9">
+        <div className="col-lg-9">
           <DashboardButtons />
           <DashboardTable posts={posts} />
         </div>

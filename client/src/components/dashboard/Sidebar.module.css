@@ -1,3 +1,12 @@
+.content {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .round {
   border: 0.25rem solid #ddd;
   border-radius: 50%;

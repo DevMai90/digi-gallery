@@ -24,22 +24,24 @@ const DashboardTable = ({ posts }) => {
   return (
     <div className="row">
       <div className="col-md-12">
-        <table
-          className={`table table-hover table-light ${style['table-border']}`}
-        >
-          <thead className="thead-light">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Category</th>
-              <th scope="col">Date</th>
-              <th scope="col">Likes</th>
-              <th scope="col">Views</th>
-              <th scope="col">Comments</th>
-            </tr>
-          </thead>
-          <tbody>{postsDisplay}</tbody>
-        </table>
+        <div className="table-responsive-md">
+          <table
+            className={`table table-hover table-light ${style['table-border']}`}
+          >
+            <thead className="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Category</th>
+                <th scope="col">Date</th>
+                <th scope="col">Likes</th>
+                <th scope="col">Views</th>
+                <th scope="col">Comments</th>
+              </tr>
+            </thead>
+            <tbody>{postsDisplay}</tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

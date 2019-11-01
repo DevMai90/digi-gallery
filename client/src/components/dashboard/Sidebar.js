@@ -6,16 +6,16 @@ import style from './Sidebar.module.css';
 const Sidebar = ({ user }) => {
   const { avatar, firstName, lastName, handle } = user;
   return (
-    <div className="text-center">
-      <div className="card p-2">
+    <div className={`text-center ${style['content']}`}>
+      <div className="p-2">
         <img src={avatar} alt="" className={` ${style['round']}`} />
         <div>{handle ? handle : `${firstName} ${lastName}`}</div>
       </div>
-      <div className="card p-2">View Posts</div>
-      <div className="card p-2">View Profile</div>
-      <div className="card p-2">Settings</div>
+      <div className=" p-2">View Posts</div>
+      <div className=" p-2">View Profile</div>
+      <div className=" p-2">Settings</div>
       {/* Collapse sidebar option? */}
-      <div className="card p-2">Collapse Sidebar?</div>
+      <div className=" p-2">Collapse Sidebar?</div>
     </div>
   );
 };
