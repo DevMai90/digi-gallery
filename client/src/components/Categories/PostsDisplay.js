@@ -12,7 +12,7 @@ const PostsDisplay = ({ posts }) => {
       <div key={_id} className="col-lg-4 my-2">
         <div className="p-3">
           <img src={image} alt="" className={style['img']} />
-          <h3 className="mb-0">{title}</h3>
+          <h3 className={style['title']}>{title}</h3>
           <span className="text-muted">
             <Moment date={date} format="MMMM Do YYYY" /> -{' '}
             {handle ? handle : `${firstName} ${lastName}`}
@@ -21,7 +21,12 @@ const PostsDisplay = ({ posts }) => {
       </div>
     );
   });
-  return <div className="row">{postsDisplay}</div>;
+  return (
+    <div className="row">
+      {console.log(posts)}
+      {postsDisplay}
+    </div>
+  );
 };
 
 PostsDisplay.propTypes = {

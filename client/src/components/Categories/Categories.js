@@ -8,22 +8,38 @@ import { getPosts } from '../../actions/post';
 
 import capitalizeWord from '../../utils/capitalizeWord';
 
-const Categories = ({ post: { posts, loading }, getPosts, match }) => {
+const Categories = ({
+  post: { posts, loading, errors },
+  getPosts,
+  match: {
+    params: { category }
+  }
+}) => {
+  // console.log(match.params.category);
+  // console.log(params);
+  // console.log(category);
   useEffect(() => {
-    getPosts();
-  }, [getPosts]);
+    getPosts(capitalizeWord(category));
+    console.log('render');
+  }, [getPosts, category]);
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-12 text-center m-auto">
           <header>
-            <h1>Filter by Category: {capitalizeWord(match.params.category)}</h1>
+            <h1>Filter by Category: {capitalizeWord(category)}</h1>
             <hr />
           </header>
         </div>
       </div>
-      {loading || !posts.length ? <Spinner /> : <PostsDisplay posts={posts} />}
+      {Object.keys(errors).length ? (
+        <h3>{errors.msg}</h3>
+      ) : loading || !posts.length ? (
+        <Spinner />
+      ) : (
+        <PostsDisplay posts={posts} />
+      )}
     </div>
   );
 };

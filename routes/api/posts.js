@@ -97,8 +97,26 @@ router.post(
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    let posts = await Post.find().sort({ date: -1 });
+    let posts = await Post.find({}).sort({ date: -1 });
 
+    res.json(posts);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   GET /api/posts/category/:category
+// @desc    Get posts by category
+// @access  Public
+router.get('/category/:category', async (req, res) => {
+  try {
+    console.log(req.params.category);
+    let posts = await Post.find({ category: req.params.category }).sort({
+      date: -1
+    });
+
+    console.log(posts);
     res.json(posts);
   } catch (err) {
     console.log(err.message);

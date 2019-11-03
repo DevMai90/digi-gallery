@@ -12,3 +12,4 @@ export const POST_ERROR = 'POST_ERROR';
 export const GET_USER_POSTS = 'GET_USER_POSTS';
 export const GET_POSTS = 'GET_POSTS';
 export const CLEAR_POSTS = 'CLEAR_POSTS';
+export const NO_POSTS_FOUND = 'NO_POSTS_FOUND';
