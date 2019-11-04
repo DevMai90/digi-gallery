@@ -14,7 +14,6 @@ const ContributorsDisplay = ({ users }) => {
         <td>
           <Moment date={date} format="MM/DD/YYYY" />
         </td>
-        <td>clicky</td>
       </tr>
     );
   });
@@ -30,7 +29,6 @@ const ContributorsDisplay = ({ users }) => {
                 <th scope="col">#</th>
                 <th scope="col">User</th>
                 <th scope="col">Member Since</th>
-                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>{usersDisplay}</tbody>
