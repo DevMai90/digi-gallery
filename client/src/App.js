@@ -6,6 +6,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
 import Categories from './components/categories/Categories';
+import Contributors from './components/contributors/Contributors';
 import NotFound from './components/layout/NotFound';
 
 // Makes Redux store available to the entire app
@@ -46,6 +47,7 @@ const App = () => {
                 path="/categories/:category"
                 component={Categories}
               />
+              <Route exact path="/contributors" component={Contributors} />
               <Route component={NotFound} />
             </Switch>
           </div>

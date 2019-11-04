@@ -7,14 +7,10 @@ import {
 } from './types';
 import axios from 'axios';
 
-// Get the most recent 15 posts
-export const getHomePosts = limits => async dispatch => {
+export const getHomePosts = () => async dispatch => {
+  // Get the most recent 15 posts
+  // @todo pagination
   try {
-    // const config = {
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // };
     const res = await axios.get('/api/posts/homepage');
 
     dispatch({

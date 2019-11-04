@@ -252,4 +252,18 @@ router.delete('/avatar', auth, async (req, res) => {
   }
 });
 
+// @route   GET /apis/users
+// @desc    Gets all users
+// @access  Public
+router.get('/', async (req, res) => {
+  try {
+    let users = await User.find();
+
+    res.json(users);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Sever Error');
+  }
+});
+
 module.exports = router;

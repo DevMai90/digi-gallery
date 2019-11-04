@@ -14,17 +14,14 @@ const Home = ({ post: { posts, loading }, getHomePosts }) => {
   // Make second call and skip the first 15? Calls on 6 after component state.
   // Pass props to components.
   // Add 6 to component state and make second API call
+  // @todo pagination
   useEffect(() => {
-    const limits = {
-      limit: 15
-    };
-
-    getHomePosts(limits);
+    getHomePosts();
   }, [getHomePosts]);
 
   return (
     <div id="homepage">
-      {loading ? (
+      {loading || !posts.length ? (
         <Spinner />
       ) : (
         <Fragment>
