@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import ContributorsNotFound from './ContributorsNotFound';
 import Spinner from '../layout/Spinner';
 
 import { connect } from 'react-redux';
@@ -19,6 +20,13 @@ const Contributors = ({ users: { users, loading }, getUsers }) => {
           </header>
         </div>
       </div>
+      {loading && !users.length ? (
+        <Spinner />
+      ) : !users.length ? (
+        <ContributorsNotFound />
+      ) : (
+        <h3>asdadafas</h3>
+      )}
     </div>
   );
 };

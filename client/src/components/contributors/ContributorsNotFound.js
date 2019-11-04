@@ -1,13 +1,13 @@
 import React from 'react';
 
-const PostsNotFound = () => {
+const ContributorsNotFound = () => {
   return (
     <div className="row">
       <div className="col text-center mx-auto">
-        <p>No one has posted under this category... be the first!</p>
+        <p>No users have been found... be the first!</p>
       </div>
     </div>
   );
 };
 
-export default PostsNotFound;
+export default ContributorsNotFound;
