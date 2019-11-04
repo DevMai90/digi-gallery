@@ -1,9 +1,9 @@
-import { GET_USERS } from './types';
+import { GET_USERS, USERS_ERROR } from './types';
 import axios from 'axios';
 
 export const getUsers = () => async dispatch => {
   try {
-    const res = await axios.get('/apis/users');
+    const res = await axios.get('/api/users');
 
     dispatch({
       type: GET_USERS,
@@ -11,7 +11,7 @@ export const getUsers = () => async dispatch => {
     });
   } catch (err) {
     dispatch({
-      type: POST_ERROR,
+      type: USERS_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
     });
   }

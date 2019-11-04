@@ -252,7 +252,7 @@ router.delete('/avatar', auth, async (req, res) => {
   }
 });
 
-// @route   GET /apis/users
+// @route   GET /api/users
 // @desc    Gets all users
 // @access  Public
 router.get('/', async (req, res) => {

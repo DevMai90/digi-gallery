@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 
 import { connect } from 'react-redux';
+import { getUsers } from '../../actions/users';
 
-const Contributors = () => {
+const Contributors = ({ users: { users, loading }, getUsers }) => {
+  useEffect(() => {
+    getUsers();
+  }, [getUsers]);
   return (
     <div className="container">
       <div className="row">
@@ -19,8 +23,16 @@ const Contributors = () => {
   );
 };
 
-Contributors.propTypes = {};
+Contributors.propTypes = {
+  getUsers: PropTypes.func.isRequired,
+  users: PropTypes.object.isRequired
+};
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  users: state.users
+});
 
-export default connect(mapStateToProps)(Contributors);
+export default connect(
+  mapStateToProps,
+  { getUsers }
+)(Contributors);

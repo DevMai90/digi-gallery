@@ -1,7 +1,8 @@
-import { GET_USERS } from '../actions/types';
+import { GET_USERS, USERS_ERROR } from '../actions/types';
 
 const initialState = {
   users: [],
+  errors: null,
   loading: true
 };
 
@@ -12,6 +13,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         users: payload,
+        loading: false
+      };
+    case USERS_ERROR:
+      return {
+        ...state,
+        errors: payload,
         loading: false
       };
     default:
