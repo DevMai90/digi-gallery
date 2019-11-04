@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import PostsDisplay from './PostsDisplay';
+import PostsNotFound from './PostsNotFound';
 import Spinner from '../layout/Spinner';
 
 import { connect } from 'react-redux';
@@ -32,7 +33,7 @@ const Categories = ({
       {loading && !posts.length ? (
         <Spinner />
       ) : !posts.length ? (
-        <h3>No posts found...</h3>
+        <PostsNotFound />
       ) : (
         <PostsDisplay posts={posts} />
       )}
