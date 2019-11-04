@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import ContributorsDisplay from './ContributorsDisplay';
 import ContributorsNotFound from './ContributorsNotFound';
 import Spinner from '../layout/Spinner';
 
@@ -25,7 +26,7 @@ const Contributors = ({ users: { users, loading }, getUsers }) => {
       ) : !users.length ? (
         <ContributorsNotFound />
       ) : (
-        <h3>asdadafas</h3>
+        <ContributorsDisplay users={users} />
       )}
     </div>
   );

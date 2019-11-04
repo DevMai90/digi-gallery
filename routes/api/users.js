@@ -257,7 +257,7 @@ router.delete('/avatar', auth, async (req, res) => {
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    let users = await User.find();
+    let users = await User.find().sort({ date: 1 });
 
     res.json(users);
   } catch (err) {
