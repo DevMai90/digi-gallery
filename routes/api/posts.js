@@ -111,12 +111,10 @@ router.get('/', async (req, res) => {
 // @access  Public
 router.get('/category/:category', async (req, res) => {
   try {
-    console.log(req.params.category);
     let posts = await Post.find({ category: req.params.category }).sort({
       date: -1
     });
 
-    console.log(posts);
     res.json(posts);
   } catch (err) {
     console.log(err.message);

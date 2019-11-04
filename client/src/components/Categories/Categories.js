@@ -9,18 +9,14 @@ import { getPosts } from '../../actions/post';
 import capitalizeWord from '../../utils/capitalizeWord';
 
 const Categories = ({
-  post: { posts, loading, errors },
+  post: { posts, loading },
   getPosts,
   match: {
     params: { category }
   }
 }) => {
-  // console.log(match.params.category);
-  // console.log(params);
-  // console.log(category);
   useEffect(() => {
     getPosts(capitalizeWord(category));
-    console.log('render');
   }, [getPosts, category]);
 
   return (
@@ -33,10 +29,10 @@ const Categories = ({
           </header>
         </div>
       </div>
-      {Object.keys(errors).length ? (
-        <h3>{errors.msg}</h3>
-      ) : loading || !posts.length ? (
+      {loading && !posts.length ? (
         <Spinner />
+      ) : !posts.length ? (
+        <h3>No posts found...</h3>
       ) : (
         <PostsDisplay posts={posts} />
       )}

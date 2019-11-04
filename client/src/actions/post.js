@@ -3,8 +3,7 @@ import {
   POST_ERROR,
   GET_USER_POSTS,
   GET_POSTS,
-  CLEAR_POSTS,
-  NO_POSTS_FOUND
+  CLEAR_POSTS
 } from './types';
 import axios from 'axios';
 
@@ -51,30 +50,16 @@ export const getPosts = category => async dispatch => {
     type: CLEAR_POSTS
   });
 
-  // console.log(category);
-
   try {
     let res;
 
     if (category === 'All') res = await axios.get('/api/posts');
     else res = await axios.get(`/api/posts/category/${category}`);
 
-    // dispatch({
-    //   type: GET_POSTS,
-    //   payload: res.data
-    // });
-
-    if (res.data.length) {
-      dispatch({
-        type: GET_POSTS,
-        payload: res.data
-      });
-    } else {
-      dispatch({
-        type: POST_ERROR,
-        payload: { msg: 'No posts found...' }
-      });
-    }
+    dispatch({
+      type: GET_POSTS,
+      payload: res.data
+    });
   } catch (err) {
     dispatch({
       type: POST_ERROR,
