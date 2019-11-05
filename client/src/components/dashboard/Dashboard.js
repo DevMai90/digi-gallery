@@ -13,7 +13,7 @@ const Dashboard = ({ auth: { loading, user }, posts, getUserPosts }) => {
     user && getUserPosts(user._id);
   }, [getUserPosts, user]);
 
-  return loading && !user ? (
+  return loading || !user ? (
     <Spinner />
   ) : (
     <div className="container">
