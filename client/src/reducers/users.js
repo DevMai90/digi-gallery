@@ -19,7 +19,7 @@ export default function(state = initialState, action) {
     case GET_PROFILE:
       return {
         ...state,
-        user: payload,
+        profile: payload,
         loading: false
       };
     case USERS_ERROR:
