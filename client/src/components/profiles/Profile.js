@@ -16,7 +16,7 @@ const Profile = ({ getProfile, users: { profile, loading }, match }) => {
     <NotFound />
   ) : (
     <div>
-      <h3>TODO</h3>
+      <h3>{profile.email}</h3>
     </div>
   );
 };

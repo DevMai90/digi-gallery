@@ -1,4 +1,4 @@
-import { GET_USERS, GET_PROFILE, USERS_ERROR } from './types';
+import { GET_USERS, GET_PROFILE, CLEAR_PROFILE, USERS_ERROR } from './types';
 import axios from 'axios';
 
 export const getUsers = () => async dispatch => {
@@ -18,6 +18,9 @@ export const getUsers = () => async dispatch => {
 };
 
 export const getProfile = id => async dispatch => {
+  dispatch({
+    type: CLEAR_PROFILE
+  });
   try {
     const res = await axios.get(`/api/users/${id}`);
     dispatch({

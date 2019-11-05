@@ -1,4 +1,9 @@
-import { GET_USERS, USERS_ERROR, GET_PROFILE } from '../actions/types';
+import {
+  GET_USERS,
+  GET_PROFILE,
+  CLEAR_PROFILE,
+  USERS_ERROR
+} from '../actions/types';
 
 const initialState = {
   profile: null,
@@ -21,6 +26,13 @@ export default function(state = initialState, action) {
         ...state,
         profile: payload,
         loading: false
+      };
+    case CLEAR_PROFILE:
+      return {
+        profile: null,
+        users: [],
+        errors: null,
+        loading: true
       };
     case USERS_ERROR:
       return {
