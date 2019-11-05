@@ -19,11 +19,11 @@ export const getUsers = () => async dispatch => {
 
 export const getProfile = id => async dispatch => {
   try {
-    // const res = await axios.get
-    // dispatch({
-    //   type: GET_PROFILE,
-    //   payload: res.data
-    // });
+    const res = await axios.get(`/api/users/${id}`);
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data
+    });
   } catch (err) {
     dispatch({
       type: USERS_ERROR,
