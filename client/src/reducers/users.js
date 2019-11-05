@@ -1,4 +1,4 @@
-import { GET_USERS, USERS_ERROR } from '../actions/types';
+import { GET_USERS, USERS_ERROR, GET_PROFILE } from '../actions/types';
 
 const initialState = {
   profile: null,

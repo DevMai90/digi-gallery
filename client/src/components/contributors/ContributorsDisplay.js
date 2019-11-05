@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 
 import style from './ContributorsDisplay.module.css';
@@ -9,10 +10,20 @@ const ContributorsDisplay = ({ users }) => {
     const { _id, firstName, lastName, handle, date } = user;
     return (
       <tr key={_id} className={style['content']}>
-        <td>{index + 1}</td>
-        <td>{handle ? handle : `${firstName} ${lastName}`}</td>
         <td>
-          <Moment date={date} format="MM/DD/YYYY" />
+          <Link to={`/contributors/${_id}`} className={style['link']}>
+            {index + 1}
+          </Link>
+        </td>
+        <td>
+          <Link to={`/contributors/${_id}`} className={style['link']}>
+            {handle ? handle : `${firstName} ${lastName}`}
+          </Link>
+        </td>
+        <td>
+          <Link to={`/contributors/${_id}`} className={style['link']}>
+            <Moment date={date} format="MM/DD/YYYY" />
+          </Link>
         </td>
       </tr>
     );
