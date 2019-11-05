@@ -257,9 +257,22 @@ router.delete('/avatar', auth, async (req, res) => {
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    let users = await User.find().sort({ date: 1 });
+    const users = await User.find().sort({ date: 1 });
 
     res.json(users);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send('Sever Error');
+  }
+});
+
+// @route   GET /api/users/:id
+// @desc    Get user profile
+// @access  Public
+router.get('/:id', async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id }).select('-password');
+    res.json(user);
   } catch (err) {
     console.log(err.message);
     res.status(500).send('Sever Error');

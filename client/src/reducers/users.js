@@ -1,6 +1,7 @@
 import { GET_USERS, USERS_ERROR } from '../actions/types';
 
 const initialState = {
+  profile: null,
   users: [],
   errors: null,
   loading: true
