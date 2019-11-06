@@ -71,7 +71,7 @@ export const getPost = id => async dispatch => {
   });
 
   try {
-    const res = axios.get(`/api/posts/post/${id}`);
+    const res = await axios.get(`/api/posts/post/${id}`);
 
     dispatch({
       type: GET_POST,
