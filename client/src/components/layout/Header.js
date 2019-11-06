@@ -49,7 +49,7 @@ const Header = ({ auth: { loading, isAuthenticated }, logout }) => {
         <button
           className="navbar-toggler ml-auto"
           data-toggle="collapse"
-          data-target="navbarCollapse"
+          data-target="#navbarCollapse"
         >
           <span className="navbar-toggler-icon"></span>
         </button>

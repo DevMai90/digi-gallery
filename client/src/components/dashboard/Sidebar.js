@@ -14,8 +14,6 @@ const Sidebar = ({ user }) => {
       <div className="p-2">View Posts</div>
       <div className="p-2">View Profile</div>
       <div className="p-2">Settings</div>
-      {/* Collapse sidebar option? */}
-      <div className="p-2">Collapse Sidebar?</div>
     </div>
   );
 };
