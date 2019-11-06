@@ -7,7 +7,7 @@ const Spinner = () => {
         <span className="sr-only">Loading...</span>
       </div>
       <p>
-        <small>Retrieving posts...</small>
+        <small>Loading...</small>
       </p>
     </div>
   );
