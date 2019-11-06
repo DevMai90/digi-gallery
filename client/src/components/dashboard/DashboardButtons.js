@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Link } from 'react-router-dom';
 
 import style from './DashboardButtons.module.css';
 
-const DashboardButtons = () => {
+const DashboardButtons = ({ user: { _id } }) => {
   return (
     <div className="row">
       <div className="col-md-3">
@@ -11,18 +13,22 @@ const DashboardButtons = () => {
           Add New Post
         </Link>
       </div>
-      <div className="col-md-3">
+      {/* <div className="col-md-3">
         <Link to="/posts" className={style['button']}>
           View Posts
         </Link>
-      </div>
+      </div> */}
       <div className="col-md-3">
-        <Link to="/profile" className={style['button']}>
+        <Link to={`/contributors/${_id}`} className={style['button']}>
           View Profile
         </Link>
       </div>
     </div>
   );
+};
+
+DashboardButtons.propTypes = {
+  user: PropTypes.object.isRequired
 };
 
 export default DashboardButtons;

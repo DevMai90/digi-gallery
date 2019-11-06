@@ -23,7 +23,7 @@ const Dashboard = ({ auth: { loading, user }, posts, getUserPosts }) => {
         </div>
 
         <div className="col-lg-9">
-          <DashboardButtons />
+          <DashboardButtons user={user} />
           <DashboardTable posts={posts} />
         </div>
       </div>
