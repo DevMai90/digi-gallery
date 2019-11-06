@@ -7,7 +7,7 @@ import style from './ProfileDisplay.module.css';
 const ProfileDisplay = ({ profile }) => {
   const { avatar, firstName, lastName, handle, about, date } = profile;
   return (
-    <div className="row">
+    <div className="row pb-3">
       <div className="col-md-9 mx-auto text-center">
         <div className="card">
           <div className={`card-body ${style['card-color']}`}>

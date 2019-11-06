@@ -1,16 +1,29 @@
 import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ProfileDisplay from './ProfileDisplay';
+import ProfilePosts from './ProfilePosts';
 import NotFound from '../layout/NotFound';
 import Spinner from '../layout/Spinner';
 
 import { connect } from 'react-redux';
 import { getProfile } from '../../actions/users';
+import { getUserPosts } from '../../actions/post';
 
-const Profile = ({ getProfile, users: { profile, loading }, match }) => {
+const Profile = ({
+  users: { profile, loading },
+  post,
+  getProfile,
+  getUserPosts,
+  match
+}) => {
+  // How many useEffect in component?
   useEffect(() => {
     getProfile(match.params.id);
   }, [getProfile, match.params.id]);
+
+  useEffect(() => {
+    getUserPosts(match.params.id);
+  }, [getUserPosts, match.params.id]);
 
   return loading && !profile ? (
     <Spinner />
@@ -30,20 +43,25 @@ const Profile = ({ getProfile, users: { profile, loading }, match }) => {
       </div>
 
       <ProfileDisplay profile={profile} />
+      <ProfilePosts post={post} />
     </Fragment>
   );
 };
 
 Profile.propTypes = {
   getProfile: PropTypes.func.isRequired,
+  getUserPosts: PropTypes.func.isRequired,
+  users: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  users: state.users
+  users: state.users,
+  post: state.post
 });
 
 export default connect(
   mapStateToProps,
-  { getProfile }
+  { getProfile, getUserPosts }
 )(Profile);

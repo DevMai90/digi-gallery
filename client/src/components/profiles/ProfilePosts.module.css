@@ -1,0 +1,20 @@
+.content {
+  font-size: 0.9rem;
+  font-weight: 200;
+  cursor: pointer;
+}
+
+.link {
+  display: block;
+  color: #000;
+}
+
+.link:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+.table-border {
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
