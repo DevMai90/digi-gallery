@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 
 import style from './DashboardTable.module.css';
@@ -9,15 +10,41 @@ const DashboardTable = ({ posts }) => {
     const { _id, title, category, date, likes, views, comments } = post;
     return (
       <tr key={_id} className={style['content']}>
-        <td>{index + 1}</td>
-        <td>{title}</td>
-        <td>{category}</td>
         <td>
-          <Moment date={date} format="MM/DD/YYYY" />
+          <Link to={`/posts/${_id}`} className={style['link']}>
+            {index + 1}
+          </Link>
         </td>
-        <td>{likes.length}</td>
-        <td>{views}</td>
-        <td>{comments.length}</td>
+        <td>
+          <Link to={`/posts/${_id}`} className={style['link']}>
+            {title}
+          </Link>
+        </td>
+        <td>
+          <Link to={`/posts/${_id}`} className={style['link']}>
+            {category}
+          </Link>
+        </td>
+        <td>
+          <Link to={`/posts/${_id}`} className={style['link']}>
+            <Moment date={date} format="MM/DD/YYYY" />
+          </Link>
+        </td>
+        <td>
+          <Link to={`/posts/${_id}`} className={style['link']}>
+            {likes.length}
+          </Link>
+        </td>
+        <td>
+          <Link to={`/posts/${_id}`} className={style['link']}>
+            {views}
+          </Link>
+        </td>
+        <td>
+          <Link to={`/posts/${_id}`} className={style['link']}>
+            {comments.length}
+          </Link>
+        </td>
       </tr>
     );
   });
