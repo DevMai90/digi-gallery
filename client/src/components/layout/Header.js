@@ -104,16 +104,13 @@ const Header = ({ auth: { loading, isAuthenticated }, logout }) => {
                 </Link>
               </div>
             </li>
-            {/* <li className="nav-item px-1">
-              <NavLink to="/posts" className="nav-link">
-                Posts
-              </NavLink>
-            </li> */}
-            <li className="nav-item px-1">
-              <NavLink to="/contributors" className="nav-link">
-                Contributors
-              </NavLink>
-            </li>
+            {isAuthenticated && (
+              <li className="nav-item px-1">
+                <NavLink to="/contributors" className="nav-link">
+                  Contributors
+                </NavLink>
+              </li>
+            )}
           </ul>
 
           <ul className="navbar-nav ml-auto">
