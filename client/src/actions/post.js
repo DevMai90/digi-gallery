@@ -3,6 +3,7 @@ import {
   POST_ERROR,
   GET_USER_POSTS,
   GET_POSTS,
+  GET_POST,
   CLEAR_POSTS
 } from './types';
 import axios from 'axios';
@@ -54,6 +55,26 @@ export const getPosts = category => async dispatch => {
 
     dispatch({
       type: GET_POSTS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const getPost = id => async dispatch => {
+  dispatch({
+    type: CLEAR_POSTS
+  });
+
+  try {
+    const res = axios.get(`/api/posts/post/${id}`);
+
+    dispatch({
+      type: GET_POST,
       payload: res.data
     });
   } catch (err) {

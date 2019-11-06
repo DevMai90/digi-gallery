@@ -8,6 +8,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Categories from './components/categories/Categories';
 import Contributors from './components/contributors/Contributors';
 import Profile from './components/profiles/Profile';
+import Posts from './components/posts/Posts';
 import NotFound from './components/layout/NotFound';
 
 // Makes Redux store available to the entire app
@@ -50,6 +51,7 @@ const App = () => {
               />
               <Route exact path="/contributors" component={Contributors} />
               <Route exact path="/contributors/:id" component={Profile} />
+              <Route exact path="/posts/:id" component={Posts} />
               <Route component={NotFound} />
             </Switch>
           </div>

@@ -3,8 +3,10 @@ import {
   POST_ERROR,
   GET_USER_POSTS,
   GET_POSTS,
-  CLEAR_POSTS
+  CLEAR_POSTS,
+  GET_POST
 } from '../actions/types';
+// Why do we have a separate action types folder?
 
 const initialState = {
   posts: [],
@@ -35,6 +37,12 @@ export default function(state = initialState, action) {
         ...state,
         loading: false,
         posts: payload
+      };
+    case GET_POST:
+      return {
+        ...state,
+        loading: false,
+        post: payload
       };
     case CLEAR_POSTS:
       return {
