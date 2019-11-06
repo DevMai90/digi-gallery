@@ -5,7 +5,6 @@ import Moment from 'react-moment';
 const PostArticle = ({ post }) => {
   const {
     views,
-    _id,
     title,
     category,
     postText,
