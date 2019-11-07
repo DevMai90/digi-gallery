@@ -4,7 +4,8 @@ import {
   GET_USER_POSTS,
   GET_POSTS,
   GET_POST,
-  CLEAR_POSTS
+  CLEAR_POSTS,
+  ADD_POST
 } from './types';
 import axios from 'axios';
 
@@ -75,6 +76,28 @@ export const getPost = id => async dispatch => {
 
     dispatch({
       type: GET_POST,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const createPost = formData => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  try {
+    const res = await axios.post('/api/posts', formData, config);
+
+    dispatch({
+      type: ADD_POST,
       payload: res.data
     });
   } catch (err) {

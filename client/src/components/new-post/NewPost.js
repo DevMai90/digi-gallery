@@ -1,0 +1,22 @@
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
+import { addPost } from '../../actions/post';
+
+const NewPost = () => {
+  return (
+    <div>
+      <h1>hiadhaidhai</h1>
+    </div>
+  );
+};
+
+NewPost.propTypes = {
+  addPost: PropTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  { addPost }
+)(NewPost);

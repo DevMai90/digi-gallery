@@ -17,3 +17,4 @@ export const USERS_ERROR = 'USERS_ERROR';
 export const GET_PROFILE = 'GET_PROFILE';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const GET_POST = 'GET_POST';
+export const ADD_POST = 'ADD_POST';
