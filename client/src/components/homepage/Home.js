@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import MainArticle from './MainArticle';
 import SecondaryArticles from './SecondaryArticles';
 import TertiaryArticles from './TertiaryArticles';
@@ -29,7 +30,9 @@ const Home = ({ post: { posts, loading }, getHomePosts }) => {
           <SecondaryArticles post={posts.slice(1, 3)} />
           <TertiaryArticles post={posts.slice(3)} />
           <div className="d-flex justify-content-center p-3">
-            <button className="btn get-more-posts">See More Posts</button>
+            <Link to="/categories/all">
+              <button className="btn get-more-posts">See More Posts</button>
+            </Link>
           </div>
         </Fragment>
       )}
