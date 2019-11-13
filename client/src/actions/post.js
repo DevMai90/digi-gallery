@@ -86,7 +86,7 @@ export const getPost = id => async dispatch => {
   }
 };
 
-export const createPost = formData => async dispatch => {
+export const addPost = formData => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
